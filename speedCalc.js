@@ -1,14 +1,14 @@
-
+//an array to store all pokemon and speed stats 
 const pokemon_base_speed = {
     calyrex_shadow: 150, flutter_mane: 135, iron_bundle: 136, 
 }
-
+//checks for nature modifier and calculates increased speed stat by 10%
 let nature;
 function getNature(){
     nature = document.getElementById('pokemon-nature').value;
     return nature;
 }
-
+//reads and returns input for Individual Values (IVs)
 let IvInput;
 function IvFetcher(){  
     IvInput = document.getElementById('Iv').value;
@@ -24,7 +24,7 @@ if(IvInput > 31 ){
 } 
 return IvInput;
 }
-
+//reads and returns input for Effort Values (EVs) 
 let EvInput;
 function EvFetcher(){  
     EvInput = document.getElementById('Ev').value;
