@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Speed Calculator</title>
+    <!--Fonts, Stylesheets, and Favicon-->
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!--Collecting Nature information-->
+    <div>
+    <h3>Nature</h3>
+    <select name="natures" id = "pokemon-nature" onchange="getNature()">
+        <option value="none"></option>
+        <option value="Adament">Adament</option>
+        <option value="Bashful">Bashful</option>
+        <option value="Bold">Bold</option>
+        <option value="Brave">Brave</option>
+        <option value="Calm">Calm</option>
+        <option value="Careful">Careful</option>
+        <option value="Docile">Docile</option>
+        <option value="Gentle">Gentle</option>
+        <option value="Hardy">Hardy</option>
+        <option value="Hasty">Hasty</option>
+        <option value="Impish">Impish</option>
+        <option value="Jolly">Jolly</option>
+        <option value="Lax">Lax</option>
+        <option value="Lonely">Lonely</option>
+        <option value="Mild">Mild</option>
+        <option value="Modest">Modest</option>
+        <option value="Naive">Naive</option>
+        <option value="Naughty">Naughty</option>
+        <option value="Quiet">Quiet</option>
+        <option value="Quirky">Quirky</option>
+        <option value="Rash">Rash</option>
+        <option value="Relaxed">Relaxed</option>
+        <option value="Sassy">Sassy</option>
+        <option value="Serious">Serious</option>
+        <option value="Timid">Timid</option>
+    </select>
+</div>
+    <!--Collecting Individual Values 0-31 (IVs)-->
+    <div>
+        <label for="Iv">Enter your Iv</label>
+        <input type="number" name="Iv" id="Iv" min="0" max="31" placeholder="0-31" onkeyup="IvFetcher()">
+    </div>
+    <div>
+        <label for="Ev">Enter your Ev</label>
+        <input type="number" name="Ev" id="Ev" min="0" max="252" placeholder="0-252" onkeyup="EvFetcher()">
+    </div>
+
+    <!--JavaScript files-->
+    <script src="speedCalc.js"></script>
+</body>
+</html>
