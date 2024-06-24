@@ -1,6 +1,6 @@
 //an array to store all pokemon and speed stats 
 const pokemon_base_speed = {
-    calyrex_shadow: 150, flutter_mane: 135, iron_bundle: 136, 
+    "Calyrex Shadow": 150, "Flutter Mane": 135, "Iron Bundle": 136, 
 }
 //checks for nature modifier and calculates increased speed stat by 10%
 let nature;
@@ -40,3 +40,35 @@ if(EvInput > 252 ){
 } 
 return EvInput;
 }
+
+/*
+//read inputted level 
+let levelInput = 50
+function levelFetcher(){
+    levelInput = document.getElementById('level').value
+    if(levelInput > 100){
+        levelInput = 100;
+        document.getElementById('level').value = 100;
+    } else if(levelInput < 0){
+        levelInput = 1;
+        document.getElementById('level').value = 1;
+    }
+    return levelInput;
+}
+*/
+
+
+let level = 50;
+function getLevel(){
+    level = document.getElementById('pokemon-level').value;
+    if(level === "one"){
+        level = 1;
+    } else if (level === "fifty"){
+        level = 50;
+    } else if (level === "one hundred"){
+        level = 100;
+    }
+    return level;
+}
+
+console.log(pokemon_base_speed["Calyrex Shadow"]);

@@ -11,7 +11,7 @@
 <body>
     <!--Collecting Nature information-->
     <div>
-    <h3>Nature</h3>
+        <h4>Nature</h4>
     <select name="natures" id = "pokemon-nature" onchange="getNature()">
         <option value="none"></option>
         <option value="Adament">Adament</option>
@@ -44,13 +44,25 @@
     <!--Collecting Individual Values 0-31 (IVs) and Effort Values 0-252 (EVs)-->
     <div>
         <label for="Iv">Enter your Iv</label>
-        <input type="number" name="Iv" id="Iv" min="0" max="31" placeholder="0-31" onkeyup="IvFetcher()">
+        <input type="number" name="Iv" id="Iv" min="0" max="31" placeholder="0-31" onkeyup="IvFetcher()" onclick="IvFetcher()">
     </div>
+    
     <div>
         <label for="Ev">Enter your Ev</label>
-        <input type="number" name="Ev" id="Ev" min="0" max="252" placeholder="0-252" onkeyup="EvFetcher()">
+        <input type="number" name="Ev" id="Ev" min="0" max="252" placeholder="0-252" onkeyup="EvFetcher()" onclick="EvFetcher()">
     </div>
-
+    <!--Collecting Pokemon's level-->
+    <!--
+    <div>
+        <label for="level">Enter your Pokemon's level</label>
+        <input type="number" name="level" id="level" min="1" max="100" placeholder="50" onkeyup="levelFetcher()" onclick="levelFetcher()">
+    </div>
+    -->
+    <select name="level" id = "pokemon-level" onchange="getLevel()">
+        <option value="one">1</option>
+        <option value="fifty" selected>50</option>
+        <option value="one hundred">100</option>
+    </select>
     <!--JavaScript files-->
     <script src="speedCalc.js"></script>
 </body>
