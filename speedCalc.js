@@ -1,6 +1,9 @@
 //an array to store all pokemon and speed stats 
+const pokemon = [
+    "Calyrex Shadow", "Flutter Mane", "Iron Bundle" 
+]
 const pokemon_base_speed = {
-    "Calyrex Shadow": 150, "Flutter Mane": 135, "Iron Bundle": 136, 
+    "Calyrex Shadow": 150, 
 }
 //checks for nature modifier and calculates increased speed stat by 10%
 let nature;
@@ -40,24 +43,7 @@ if(EvInput > 252 ){
 } 
 return EvInput;
 }
-
-/*
-//read inputted level 
-let levelInput = 50
-function levelFetcher(){
-    levelInput = document.getElementById('level').value
-    if(levelInput > 100){
-        levelInput = 100;
-        document.getElementById('level').value = 100;
-    } else if(levelInput < 0){
-        levelInput = 1;
-        document.getElementById('level').value = 1;
-    }
-    return levelInput;
-}
-*/
-
-
+//lets user input what level their format is using
 let level = 50;
 function getLevel(){
     level = document.getElementById('pokemon-level').value;
@@ -70,5 +56,40 @@ function getLevel(){
     }
     return level;
 }
+//search for pokemon
+const searchInput = document.getElementById('pokemonSearch');
+const searchWrapper = document.querySelector('.wrapper');
+const resultsWrapper = document.querySelector('.results');
+let pokemonOneSelection;
+searchInput.addEventListener('keyup', () => {
+  let results = [];
+  let input = searchInput.value;
+  if (input.length) {
+    results = pokemon.filter((item) => {
+      return item.toLowerCase().includes(input.toLowerCase());
+    });
+  }
+  renderResults(results);
+});
+
+function renderResults(results) {
+  if (!results.length) {
+    return searchWrapper.classList.remove('show');
+  }
+
+  let content = results
+    .map((item) => {return `<li id="pokemonSelectionOne" onclick=updater()>${item}</li>`;}).join('');
+
+  searchWrapper.classList.add('show');
+  resultsWrapper.innerHTML = `<ul>${content}</ul>`;
+  pokemonOneSelection = document.getElementById('pokemonSelectionOne').innerText;
+  return pokemonOneSelection;
+}
+
+function updater(){
+    document.getElementById('pokemonSearch').value = document.getElementById('pokemonSelectionOne').innerText;
+    searchWrapper.classList.remove('show');
+}
+
 
 console.log(pokemon_base_speed["Calyrex Shadow"]);
