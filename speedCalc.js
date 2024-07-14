@@ -3,7 +3,7 @@ const pokemon = [
     "Calyrex Shadow", "Flutter Mane", "Iron Bundle" 
 ]
 const pokemon_base_speed = {
-    "Calyrex Shadow": 150, 
+    "Calyrex Shadow": 150, "Flutter Mane": 135, "Iron Bundle": 135,
 }
 //checks for nature modifier and calculates increased speed stat by 10%
 let nature;
@@ -14,7 +14,7 @@ function getNature(){
 //reads and returns input for Individual Values (IVs)
 let IvInput;
 function IvFetcher(){  
-    IvInput = document.getElementById('Iv').value;
+    IvInput = parseInt(document.getElementById('Iv').value);
 if(IvInput > 31 ){
     IvInput = 31;
     document.getElementById('Iv').value = 31
@@ -30,7 +30,7 @@ return IvInput;
 //reads and returns input for Effort Values (EVs) 
 let EvInput;
 function EvFetcher(){  
-    EvInput = document.getElementById('Ev').value;
+    EvInput = parseInt(document.getElementById('Ev').value);
 if(EvInput > 252 ){
     EvInput = 252;
     document.getElementById('Ev').value = 252
@@ -89,7 +89,16 @@ function renderResults(results) {
 function updater(){
     document.getElementById('pokemonSearch').value = document.getElementById('pokemonSelectionOne').innerText;
     searchWrapper.classList.remove('show');
+    pokemonParser();
 }
-
-
 console.log(pokemon_base_speed["Calyrex Shadow"]);
+
+//Take selected pokemon and parse the obj 
+function pokemonParser(){
+    let baseSpeed = pokemon_base_speed[pokemonOneSelection];
+    let pokemonOneSpeed;
+    if(nature == "Jolly"){
+        pokemonOneSpeed = ((baseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5) * 1.10;
+        console.log(pokemonOneSpeed);
+    }
+}
