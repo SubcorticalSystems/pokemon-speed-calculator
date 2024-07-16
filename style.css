@@ -1,3 +1,15 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 * {
@@ -10,19 +22,24 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+
+header{
+align-items: center;
+}
+
 .wrapper {
   margin: 0 auto;
   background: #ffffff;
   border-radius: 5px;
   box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.15);
   position: relative;
-  width: 450px;
+  width: 225px;
 }
 
 input {
   width:100%;
   border: none;
-  height: 50px;
+  height: 40px;
   border-radius: 5px;
   padding: 0px 40px 0px 10px;
   font-size: 18px;
@@ -33,6 +50,7 @@ input:focus {
   outline: none;
 }
 
+/*
 button {
   position: absolute;
   border: none;
@@ -55,7 +73,7 @@ button i {
   line-height: 50px;
   font-size: 22px;
 }
-
+*/
 .results {
   padding: 0px;
 }
@@ -68,6 +86,8 @@ button i {
   display: none;
   padding: 8px 12px;
   transition: all .5s linear;
+  height: 2rem;
+  overflow: hidden;
 }
 
 .show .results ul li {
@@ -81,4 +101,27 @@ button i {
 
 .results ul li:hover {
   background: #ececec
+}
+
+.input-box {
+  width: 8rem;
+  height: 2rem;
+}
+
+.nature-wrapper{
+  display: flex;
+  height: 3rem;
+  align-items: center;
+}
+.level-wrapper{
+  display: flex;
+  height: 3rem;
+  align-items: center;
+}
+#pokemonOneWrap{
+  display: flex;
+}
+
+#pokemonOneContainer{
+  margin-right: 5rem;
 }

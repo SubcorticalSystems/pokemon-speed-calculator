@@ -1,9 +1,10 @@
-//an array to store all pokemon and speed stats 
+//an array to store all pokemon and an object to store pokemon&speed stat pairs
 const pokemon = [
-    "Calyrex Shadow", "Flutter Mane", "Iron Bundle" 
-]
+"Abomasnow", "Alcremie", "Alomomola", "Altaria", "Ambipom", "Amoongus", "Ampharos", "Annihilape", "Appletun", "Araquanid", "Arboliva", "Arcanine", "Arcanine-Hisui", "Arceus", "Archaludon", 
+"Armarouge", "Articuno", "Articuno-Galar", "Avalugg", "Avalugg-Hisui", "Azelf", "Azumarill", "Barraskewda",   ]
+
 const pokemon_base_speed = {
-    "Calyrex Shadow": 150, "Flutter Mane": 135, "Iron Bundle": 135,
+"Calyrex Shadow": 150, "Flutter Mane": 135, "Iron Bundle": 135,
 }
 //checks for nature modifier and calculates increased speed stat by 10%
 let nature;
@@ -56,7 +57,7 @@ function getLevel(){
     }
     return level;
 }
-//search for pokemon
+//search for pokemon with arrow function practice
 const searchInput = document.getElementById('pokemonSearch');
 const searchWrapper = document.querySelector('.wrapper');
 const resultsWrapper = document.querySelector('.results');
@@ -75,15 +76,14 @@ searchInput.addEventListener('keyup', () => {
 function renderResults(results) {
   if (!results.length) {
     return searchWrapper.classList.remove('show');
+  } else if (results.length < 25){
+    let content = results.map((item) => {return `<li id="pokemonSelectionOne" onclick=updater()>${item}</li>`;}).join('');
+    searchWrapper.classList.add('show');
+    resultsWrapper.innerHTML = `<ul>${content}</ul>`;
+    pokemonOneSelection = document.getElementById('pokemonSelectionOne').innerText;
+    return pokemonOneSelection;
   }
-
-  let content = results
-    .map((item) => {return `<li id="pokemonSelectionOne" onclick=updater()>${item}</li>`;}).join('');
-
-  searchWrapper.classList.add('show');
-  resultsWrapper.innerHTML = `<ul>${content}</ul>`;
-  pokemonOneSelection = document.getElementById('pokemonSelectionOne').innerText;
-  return pokemonOneSelection;
+  
 }
 
 function updater(){
@@ -91,14 +91,13 @@ function updater(){
     searchWrapper.classList.remove('show');
     pokemonParser();
 }
-console.log(pokemon_base_speed["Calyrex Shadow"]);
 
 //Take selected pokemon and parse the obj 
 function pokemonParser(){
     let baseSpeed = pokemon_base_speed[pokemonOneSelection];
     let pokemonOneSpeed;
     if(nature == "Jolly"){
-        pokemonOneSpeed = ((baseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5) * 1.10;
+        pokemonOneSpeed = Math.trunc(((baseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5) * 1.10);
         console.log(pokemonOneSpeed);
     }
 }

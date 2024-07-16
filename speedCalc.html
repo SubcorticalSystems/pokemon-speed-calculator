@@ -6,12 +6,30 @@
     <title>Pokemon Speed Calculator</title>
     <!--Fonts, Stylesheets, and Favicon-->
     <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
+<!--Top of screen content-->
+<header>
+    <h1>Hello</h1>
+</header>
+<!--Main Content-->
+<div id="pokemonOneWrap">
+<!--Determining pokemon choice-->
+<div id="pokemonOneContainer">
+    <div class="container">
+        <div class="wrapper ">
+            <input type="text" name="pokemonSearch" id="pokemonSearch" placeholder="Select First Pokemon" autocomplete="off">
+                <div class="results">
+                <ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
     <!--Collecting Nature information-->
-    <div>
-        <h4>Nature</h4>
+    <div id="pokemonOneSpecWrap">
+    <div class="nature-wrapper">
+        <p>Nature</p>
     <select name="natures" id = "pokemon-nature" onchange="getNature()">
         <option value="none"></option>
         <option value="Adament">Adament</option>
@@ -43,28 +61,23 @@
 </div>
     <!--Collecting Individual Values 0-31 (IVs) and Effort Values 0-252 (EVs)-->
     <div>
-        <label for="Iv">Enter your Iv</label>
-        <input type="number" name="Iv" id="Iv" min="0" max="31" placeholder="0-31" onkeyup="IvFetcher()" onclick="IvFetcher()">
+        <label for="Iv">Enter IVs</label>
+        <input type="number" name="Iv" class="input-box" id="Iv" min="0" max="31" placeholder="0-31" onkeyup="IvFetcher()" onclick="IvFetcher()">
     </div>
     <div>
-        <label for="Ev">Enter your Ev</label>
-        <input type="number" name="Ev" id="Ev" min="0" max="252" placeholder="0-252" onkeyup="EvFetcher()" onclick="EvFetcher()">
+        <label for="Ev">Enter EVs</label>
+        <input type="number" name="Ev" class="input-box" id="Ev" min="0" max="252" placeholder="0-252" onkeyup="EvFetcher()" onclick="EvFetcher()">
     </div>
     <!--Collecting Pokemon's level-->
+    <div class="level-wrapper">
+    <p>Level</p>
     <select name="level" id = "pokemon-level" onchange="getLevel()">
         <option value="one">1</option>
         <option value="fifty" selected>50</option>
         <option value="one hundred">100</option>
     </select>
-    <!--Determining pokemon choice-->
-<div class="container">
-    <div class="wrapper ">
-        <input type="text" name="pokemonSearch" id="pokemonSearch" placeholder="Select First Pokemon" autocomplete="off">
-        <div class="results">
-            <ul>
-            </ul>
-        </div>
-    </div>
+</div>
+</div>
 </div>
     <!--JavaScript files-->
     <script src="speedCalc.js"></script>
