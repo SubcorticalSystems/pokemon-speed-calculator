@@ -1,11 +1,5 @@
-//an array to store all pokemon and an object to store pokemon&speed stat pairs
-const pokemon = [
-"Abomasnow", "Alcremie", "Alomomola", "Altaria", "Ambipom", "Amoongus", "Ampharos", "Annihilape", "Appletun", "Araquanid", "Arboliva", "Arcanine", "Arcanine-Hisui", "Arceus", "Archaludon", 
-"Armarouge", "Articuno", "Articuno-Galar", "Avalugg", "Avalugg-Hisui", "Azelf", "Azumarill", "Barraskewda",   ]
+///https://pokeapi.co/api/v2/pokemon <---api link 
 
-const pokemon_base_speed = {
-"Calyrex Shadow": 150, "Flutter Mane": 135, "Iron Bundle": 135,
-}
 //checks for nature modifier and calculates increased speed stat by 10%
 let nature;
 function getNature(){
@@ -58,6 +52,8 @@ function getLevel(){
     return level;
 }
 //search for pokemon with arrow function practice
+
+/*
 const searchInput = document.getElementById('pokemonSearch');
 const searchWrapper = document.querySelector('.wrapper');
 const resultsWrapper = document.querySelector('.results');
@@ -66,9 +62,11 @@ searchInput.addEventListener('keyup', () => {
   let results = [];
   let input = searchInput.value;
   if (input.length) {
-    results = pokemon.filter((item) => {
+    results = pokemon.filter(
+        (item) => {
       return item.toLowerCase().includes(input.toLowerCase());
-    });
+    }
+);
   }
   renderResults(results);
 });
@@ -76,14 +74,14 @@ searchInput.addEventListener('keyup', () => {
 function renderResults(results) {
   if (!results.length) {
     return searchWrapper.classList.remove('show');
-  } else if (results.length < 25){
+  } else if (results.length){
     let content = results.map((item) => {return `<li id="pokemonSelectionOne" onclick=updater()>${item}</li>`;}).join('');
     searchWrapper.classList.add('show');
     resultsWrapper.innerHTML = `<ul>${content}</ul>`;
     pokemonOneSelection = document.getElementById('pokemonSelectionOne').innerText;
+    console.log(pokemonOneSelection + " Inside render results");
     return pokemonOneSelection;
   }
-  
 }
 
 function updater(){
@@ -91,6 +89,82 @@ function updater(){
     searchWrapper.classList.remove('show');
     pokemonParser();
 }
+*/
+const inputFirst = document.querySelector("#pokemonOneInput");
+inputFirst.addEventListener("input", pokemonOneInputChange)
+
+getPokemonData();
+
+let pokemonNames = [];
+
+async function getPokemonData(){
+    const pokemonRes = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=1302");
+
+    const data = await pokemonRes.json();
+
+    pokemonNames = data.results.map((pokemon) => {
+        return pokemon.name;
+
+    });
+    console.log(data);
+    console.log(pokemonNames);
+}
+
+function pokemonOneInputChange() {
+    removeAutocompleteDropdown();
+
+console.log(inputFirst.value);
+const value = inputFirst.value.toLowerCase();
+if(value.length === 0){
+    return;
+}
+const filteredNames = [];
+
+pokemonNames.forEach((pokemonName) => {
+    if(pokemonName.substr(0, value.length).toLowerCase() === value){
+        filteredNames.push(pokemonName);
+    }
+})
+console.log(filteredNames);
+createAutocompleteDropdown(filteredNames);
+}
+
+function createAutocompleteDropdown(list){
+const inputFirst = document.createElement('ul');
+inputFirst.className = "autocomplete-list";
+inputFirst.id  = "autocomplete-list"
+
+list.forEach((pokemon) => {
+    const listItem = document.createElement("li");
+    const pokemonOneButton = document.createElement("button");
+    pokemonOneButton.innerHTML = pokemon;
+    pokemonOneButton.addEventListener("click", onPokemonOneButtonClick);
+    listItem.appendChild(pokemonOneButton);
+    inputFirst.appendChild(listItem);
+})
+
+document.querySelector("#autocomplete-wrapper").appendChild(inputFirst);
+}
+
+function removeAutocompleteDropdown(){
+const inputFirst = document.querySelector("#autocomplete-list");
+if(inputFirst){
+    inputFirst.remove();
+} 
+}
+
+
+let pokemonOne;
+function onPokemonOneButtonClick(event){
+event.preventDefault();
+const pokemonOneButton = event.target; 
+inputFirst.value = pokemonOneButton.innerHTML;
+pokemonOne = pokemonOneButton.innerHTML;
+removeAutocompleteDropdown();
+return pokemonOne;
+}
+
+
 
 //Take selected pokemon and parse the obj 
 function pokemonParser(){

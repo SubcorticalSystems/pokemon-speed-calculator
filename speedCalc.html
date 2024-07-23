@@ -10,11 +10,13 @@
 <body>
 <!--Top of screen content-->
 <header>
-    <h1>Hello</h1>
+    <h1>Pokemon Speed Calculator</h1>
 </header>
 <!--Main Content-->
+<div id="main">
+<!--first pokemon selection data-->
 <div id="pokemonOneWrap">
-<!--Determining pokemon choice-->
+<!--Determining pokemon choice OLD
 <div id="pokemonOneContainer">
     <div class="container">
         <div class="wrapper ">
@@ -26,8 +28,26 @@
         </div>
     </div>
 </div>
-    <!--Collecting Nature information-->
-    <div id="pokemonOneSpecWrap">
+-->
+<form action="" autocomplete="off">
+    <div id="autocomplete-wrapper" class="autocomplete-wrapper">
+    <input id="pokemonOneInput" type="text" placeholder="Enter First Pokemon" >
+</div>
+
+<!--<button type="submit" class="btn-submit">Send</button>-->
+</form>
+<div id="pokemonOneSpecWrap">
+
+    <!--Collecting Pokemon's level-->
+     <div class="level-wrapper">
+        <p>Level</p>
+        <select name="level" id = "pokemon-level" onchange="getLevel()">
+            <option value="one">1</option>
+            <option value="fifty" selected>50</option>
+            <option value="one hundred">100</option>
+        </select>
+    </div>
+<!--Collecting Nature information-->
     <div class="nature-wrapper">
         <p>Nature</p>
     <select name="natures" id = "pokemon-nature" onchange="getNature()">
@@ -59,7 +79,7 @@
         <option value="Timid">Timid</option>
     </select>
 </div>
-    <!--Collecting Individual Values 0-31 (IVs) and Effort Values 0-252 (EVs)-->
+<!--Collecting Individual Values 0-31 (IVs) and Effort Values 0-252 (EVs)-->
     <div>
         <label for="Iv">Enter IVs</label>
         <input type="number" name="Iv" class="input-box" id="Iv" min="0" max="31" placeholder="0-31" onkeyup="IvFetcher()" onclick="IvFetcher()">
@@ -68,18 +88,77 @@
         <label for="Ev">Enter EVs</label>
         <input type="number" name="Ev" class="input-box" id="Ev" min="0" max="252" placeholder="0-252" onkeyup="EvFetcher()" onclick="EvFetcher()">
     </div>
-    <!--Collecting Pokemon's level-->
-    <div class="level-wrapper">
-    <p>Level</p>
-    <select name="level" id = "pokemon-level" onchange="getLevel()">
-        <option value="one">1</option>
-        <option value="fifty" selected>50</option>
-        <option value="one hundred">100</option>
-    </select>
+   
+
 </div>
 </div>
+<!--first pokemon selection data-->
+<div id="pokemonOneWrap">
+    <!--Determining pokemon choice-->
+    <form action="" autocomplete="off">
+        <div id="autocomplete-wrapper" class="autocomplete-wrapper">
+        <input id="pokemonOneInput" type="text" placeholder="Enter First Pokemon" >
+    </div>
+    
+    <!--<button type="submit" class="btn-submit">Send</button>-->
+    </form>
+    <div id="pokemonOneSpecWrap">
+        <!--Collecting Pokemon's level-->
+         <div class="level-wrapper">
+            <p>Level</p>
+            <select name="level" id = "pokemon-level" onchange="getLevel()">
+                <option value="one">1</option>
+                <option value="fifty" selected>50</option>
+                <option value="one hundred">100</option>
+            </select>
+        </div>
+    <!--Collecting Nature information-->
+        <div class="nature-wrapper">
+            <p>Nature</p>
+        <select name="natures" id = "pokemon-nature" onchange="getNature()">
+            <option value="none"></option>
+            <option value="Adament">Adament</option>
+            <option value="Bashful">Bashful</option>
+            <option value="Bold">Bold</option>
+            <option value="Brave">Brave</option>
+            <option value="Calm">Calm</option>
+            <option value="Careful">Careful</option>
+            <option value="Docile">Docile</option>
+            <option value="Gentle">Gentle</option>
+            <option value="Hardy">Hardy</option>
+            <option value="Hasty">Hasty</option>
+            <option value="Impish">Impish</option>
+            <option value="Jolly">Jolly</option>
+            <option value="Lax">Lax</option>
+            <option value="Lonely">Lonely</option>
+            <option value="Mild">Mild</option>
+            <option value="Modest">Modest</option>
+            <option value="Naive">Naive</option>
+            <option value="Naughty">Naughty</option>
+            <option value="Quiet">Quiet</option>
+            <option value="Quirky">Quirky</option>
+            <option value="Rash">Rash</option>
+            <option value="Relaxed">Relaxed</option>
+            <option value="Sassy">Sassy</option>
+            <option value="Serious">Serious</option>
+            <option value="Timid">Timid</option>
+        </select>
+    </div>
+    <!--Collecting Individual Values 0-31 (IVs) and Effort Values 0-252 (EVs)-->
+        <div>
+            <label for="Iv">Enter IVs</label>
+            <input type="number" name="Iv" class="input-box" id="Iv" min="0" max="31" placeholder="0-31" onkeyup="IvFetcher()" onclick="IvFetcher()">
+        </div>
+        <div>
+            <label for="Ev">Enter EVs</label>
+            <input type="number" name="Ev" class="input-box" id="Ev" min="0" max="252" placeholder="0-252" onkeyup="EvFetcher()" onclick="EvFetcher()">
+        </div>
+       
+    
+    </div>
+    </div>
 </div>
-    <!--JavaScript files-->
+<!--JavaScript files-->
     <script src="speedCalc.js"></script>
 </body>
 </html>
