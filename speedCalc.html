@@ -16,32 +16,19 @@
 <div id="main">
 <!--first pokemon selection data-->
 <div id="pokemonOneWrap">
-<!--Determining pokemon choice OLD
-<div id="pokemonOneContainer">
-    <div class="container">
-        <div class="wrapper ">
-            <input type="text" name="pokemonSearch" id="pokemonSearch" placeholder="Select First Pokemon" autocomplete="off">
-                <div class="results">
-                <ul>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
--->
+
 <form action="" autocomplete="off">
     <div id="autocomplete-wrapper" class="autocomplete-wrapper">
     <input id="pokemonOneInput" type="text" placeholder="Enter First Pokemon" >
 </div>
-
 <!--<button type="submit" class="btn-submit">Send</button>-->
 </form>
 <div id="pokemonOneSpecWrap">
 
     <!--Collecting Pokemon's level-->
      <div class="level-wrapper">
-        <p>Level</p>
-        <select name="level" id = "pokemon-level" onchange="getLevel()">
+        <p class="level-title">Level</p>
+        <select name="level" class="pokemon-select" id="pokemon-level" onchange="getLevel()">
             <option value="one">1</option>
             <option value="fifty" selected>50</option>
             <option value="one hundred">100</option>
@@ -50,7 +37,7 @@
 <!--Collecting Nature information-->
     <div class="nature-wrapper">
         <p>Nature</p>
-    <select name="natures" id = "pokemon-nature" onchange="getNature()">
+    <select name="natures" id="pokemon-nature" onchange="getNature()">
         <option value="none"></option>
         <option value="Adament">Adament</option>
         <option value="Bashful">Bashful</option>
@@ -92,20 +79,20 @@
 
 </div>
 </div>
-<!--first pokemon selection data-->
-<div id="pokemonOneWrap">
+<!------------------------------------Pokemon One above Pokemon Two Below----------------------------------------------------->
+<!--Second pokemon selection data-->
+<div id="pokemonTwoWrap">
     <!--Determining pokemon choice-->
     <form action="" autocomplete="off">
-        <div id="autocomplete-wrapper" class="autocomplete-wrapper">
-        <input id="pokemonOneInput" type="text" placeholder="Enter First Pokemon" >
+        <div id="autocomplete-wrapper-two" class="autocomplete-wrapper">
+        <input id="pokemonTwoInput" type="text" placeholder="Enter Second Pokemon" >
     </div>
-    
     <!--<button type="submit" class="btn-submit">Send</button>-->
     </form>
     <div id="pokemonOneSpecWrap">
         <!--Collecting Pokemon's level-->
          <div class="level-wrapper">
-            <p>Level</p>
+            <p class="level-title">Level</p>
             <select name="level" id = "pokemon-level" onchange="getLevel()">
                 <option value="one">1</option>
                 <option value="fifty" selected>50</option>

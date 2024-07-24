@@ -1,5 +1,17 @@
 ///https://pokeapi.co/api/v2/pokemon <---api link 
 
+/* logic for speed calculation
+
+if(nature == "Jolly" ){
+        pokemonOneSpeed = Math.trunc(((baseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5) * 1.10);
+        console.log(pokemonOneSpeed);
+    } else {
+        pokemonOneSpeed = Math.trunc(((baseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5));
+        console.log(pokemonOneSpeed);
+    }
+
+*/ 
+
 //checks for nature modifier and calculates increased speed stat by 10%
 let nature;
 function getNature(){
@@ -51,47 +63,10 @@ function getLevel(){
     }
     return level;
 }
-//search for pokemon with arrow function practice
 
-/*
-const searchInput = document.getElementById('pokemonSearch');
-const searchWrapper = document.querySelector('.wrapper');
-const resultsWrapper = document.querySelector('.results');
-let pokemonOneSelection;
-searchInput.addEventListener('keyup', () => {
-  let results = [];
-  let input = searchInput.value;
-  if (input.length) {
-    results = pokemon.filter(
-        (item) => {
-      return item.toLowerCase().includes(input.toLowerCase());
-    }
-);
-  }
-  renderResults(results);
-});
-
-function renderResults(results) {
-  if (!results.length) {
-    return searchWrapper.classList.remove('show');
-  } else if (results.length){
-    let content = results.map((item) => {return `<li id="pokemonSelectionOne" onclick=updater()>${item}</li>`;}).join('');
-    searchWrapper.classList.add('show');
-    resultsWrapper.innerHTML = `<ul>${content}</ul>`;
-    pokemonOneSelection = document.getElementById('pokemonSelectionOne').innerText;
-    console.log(pokemonOneSelection + " Inside render results");
-    return pokemonOneSelection;
-  }
-}
-
-function updater(){
-    document.getElementById('pokemonSearch').value = document.getElementById('pokemonSelectionOne').innerText;
-    searchWrapper.classList.remove('show');
-    pokemonParser();
-}
-*/
+//Pokemon One Autocomplete 
 const inputFirst = document.querySelector("#pokemonOneInput");
-inputFirst.addEventListener("input", pokemonOneInputChange)
+inputFirst.addEventListener("input", pokemonOneInputChange);
 
 getPokemonData();
 
@@ -154,6 +129,71 @@ if(inputFirst){
 }
 
 
+
+//Pokemon two autocomplete 
+const inputSecond = document.querySelector("#pokemonTwoInput");
+inputSecond.addEventListener("input", pokemonTwoInputChange);
+
+getPokemonDataTwo();
+
+let pokemonTwoNames = [];
+
+async function getPokemonDataTwo(){
+    const pokemonRes = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=1302");
+
+    const data = await pokemonRes.json();
+
+    pokemonTwoNames = data.results.map((pokemon) => {
+        return pokemon.name;
+
+    });
+    console.log(data);
+    console.log(pokemonTwoNames);
+}
+
+function pokemonTwoInputChange() {
+    removeAutocompleteDropdownTwo();
+
+console.log(inputSecond.value);
+const value = inputSecond.value.toLowerCase();
+if(value.length === 0){
+    return;
+}
+const filteredNames = [];
+
+pokemonTwoNames.forEach((pokemonName) => {
+    if(pokemonName.substr(0, value.length).toLowerCase() === value){
+        filteredNames.push(pokemonName);
+    }
+})
+console.log(filteredNames);
+createAutocompleteDropdownTwo(filteredNames);
+}
+
+function createAutocompleteDropdownTwo(list){
+const inputSecond = document.createElement('ul');
+inputSecond.className = "autocomplete-list";
+inputSecond.id  = "autocomplete-list-two"
+
+list.forEach((pokemon) => {
+    const listItem = document.createElement("li");
+    const pokemonTwoButton = document.createElement("button");
+    pokemonTwoButton.innerHTML = pokemon;
+    pokemonTwoButton.addEventListener("click", onPokemonTwoButtonClick);
+    listItem.appendChild(pokemonTwoButton);
+    inputSecond.appendChild(listItem);
+})
+
+document.querySelector("#autocomplete-wrapper-two").appendChild(inputSecond);
+}
+
+function removeAutocompleteDropdownTwo(){
+const inputSecond = document.querySelector("#autocomplete-list-two");
+if(inputSecond){
+    inputSecond.remove();
+} 
+}
+//Get click value from Autocomplete to update input text and store pokemon selection
 let pokemonOne;
 function onPokemonOneButtonClick(event){
 event.preventDefault();
@@ -164,14 +204,13 @@ removeAutocompleteDropdown();
 return pokemonOne;
 }
 
-
-
-//Take selected pokemon and parse the obj 
-function pokemonParser(){
-    let baseSpeed = pokemon_base_speed[pokemonOneSelection];
-    let pokemonOneSpeed;
-    if(nature == "Jolly"){
-        pokemonOneSpeed = Math.trunc(((baseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5) * 1.10);
-        console.log(pokemonOneSpeed);
-    }
+let pokemonTwo;
+function onPokemonTwoButtonClick(event){
+event.preventDefault();
+const pokemonTwoButton = event.target; 
+inputSecond.value = pokemonTwoButton.innerHTML;
+pokemonTwo = pokemonTwoButton.innerHTML;
+removeAutocompleteDropdownTwo();
+return pokemonTwo;
 }
+
