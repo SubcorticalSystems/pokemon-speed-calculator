@@ -85,6 +85,14 @@ async function getPokemonData(){
     console.log(pokemonNames);
 }
 
+async function pokemonOneSpeedFetcher(pokemonOne){
+    const pokemonStat = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonOne)
+    const speed = await pokemonStat.json();
+    pokemonOneSpeed = speed.stats[5].base_stat;
+    alert(pokemonOneSpeed);
+    return pokemonOneSpeed;
+}
+
 function pokemonOneInputChange() {
     removeAutocompleteDropdown();
 
@@ -128,16 +136,11 @@ if(inputFirst){
 } 
 }
 
-
-
 //Pokemon two autocomplete 
 const inputSecond = document.querySelector("#pokemonTwoInput");
 inputSecond.addEventListener("input", pokemonTwoInputChange);
-
 getPokemonDataTwo();
-
 let pokemonTwoNames = [];
-
 async function getPokemonDataTwo(){
     const pokemonRes = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=1302");
 
@@ -149,6 +152,14 @@ async function getPokemonDataTwo(){
     });
     console.log(data);
     console.log(pokemonTwoNames);
+}
+
+async function pokemonTwoSpeedFetcher(pokemonOne){
+    const pokemonStat = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonOne)
+    const speed = await pokemonStat.json();
+    pokemonTwoSpeed = speed.stats[5].base_stat;
+    alert(pokemonTwoSpeed);
+    return pokemonTwoSpeed;
 }
 
 function pokemonTwoInputChange() {
@@ -171,46 +182,44 @@ createAutocompleteDropdownTwo(filteredNames);
 }
 
 function createAutocompleteDropdownTwo(list){
-const inputSecond = document.createElement('ul');
-inputSecond.className = "autocomplete-list";
-inputSecond.id  = "autocomplete-list-two"
-
-list.forEach((pokemon) => {
-    const listItem = document.createElement("li");
-    const pokemonTwoButton = document.createElement("button");
-    pokemonTwoButton.innerHTML = pokemon;
-    pokemonTwoButton.addEventListener("click", onPokemonTwoButtonClick);
-    listItem.appendChild(pokemonTwoButton);
-    inputSecond.appendChild(listItem);
-})
-
-document.querySelector("#autocomplete-wrapper-two").appendChild(inputSecond);
+    const inputSecond = document.createElement('ul');
+    inputSecond.className = "autocomplete-list";
+    inputSecond.id  = "autocomplete-list-two"
+        list.forEach((pokemon) => {
+            const listItem = document.createElement("li");
+            const pokemonTwoButton = document.createElement("button");
+            pokemonTwoButton.innerHTML = pokemon;
+            pokemonTwoButton.addEventListener("click", onPokemonTwoButtonClick);
+            listItem.appendChild(pokemonTwoButton);
+            inputSecond.appendChild(listItem);
+    })
+    document.querySelector("#autocomplete-wrapper-two").appendChild(inputSecond);
 }
 
 function removeAutocompleteDropdownTwo(){
-const inputSecond = document.querySelector("#autocomplete-list-two");
-if(inputSecond){
-    inputSecond.remove();
-} 
+    const inputSecond = document.querySelector("#autocomplete-list-two");
+        if(inputSecond){
+            inputSecond.remove();
+    } 
 }
 //Get click value from Autocomplete to update input text and store pokemon selection
 let pokemonOne;
 function onPokemonOneButtonClick(event){
-event.preventDefault();
-const pokemonOneButton = event.target; 
-inputFirst.value = pokemonOneButton.innerHTML;
-pokemonOne = pokemonOneButton.innerHTML;
-removeAutocompleteDropdown();
-return pokemonOne;
+    event.preventDefault();
+    const pokemonOneButton = event.target; 
+    inputFirst.value = pokemonOneButton.innerHTML;
+    pokemonOne = pokemonOneButton.innerHTML;
+    removeAutocompleteDropdown();
+    pokemonOneSpeedFetcher(pokemonOne);
 }
 
 let pokemonTwo;
 function onPokemonTwoButtonClick(event){
-event.preventDefault();
-const pokemonTwoButton = event.target; 
-inputSecond.value = pokemonTwoButton.innerHTML;
-pokemonTwo = pokemonTwoButton.innerHTML;
-removeAutocompleteDropdownTwo();
-return pokemonTwo;
+    event.preventDefault();
+    const pokemonTwoButton = event.target; 
+    inputSecond.value = pokemonTwoButton.innerHTML;
+    pokemonTwo = pokemonTwoButton.innerHTML;
+    removeAutocompleteDropdownTwo();
+    pokemonTwoSpeedFetcher(pokemonTwo);
 }
 
