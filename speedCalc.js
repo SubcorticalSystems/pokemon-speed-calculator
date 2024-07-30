@@ -17,124 +17,112 @@ let nature;
 function getNature(){
     nature = document.getElementById('pokemon-nature').value;
     return nature;
-}
+};
 //reads and returns input for Individual Values (IVs)
 let IvInput;
 function IvFetcher(){  
     IvInput = parseInt(document.getElementById('Iv').value);
-if(IvInput > 31 ){
-    IvInput = 31;
-    document.getElementById('Iv').value = 31
-    console.log('IvInput is greater than 31')
-    return IvInput;
-} else if (IvInput < 0){
-    IvInput = 0;
-    document.getElementById('Iv').value = 0
-    console.log('IvInput is less than 0')
-} 
+        if(IvInput > 31 ){
+            IvInput = 31;
+            document.getElementById('Iv').value = 31
+            console.log('IvInput is greater than 31')
+            return IvInput;
+    } else if (IvInput < 0){
+        IvInput = 0;
+        document.getElementById('Iv').value = 0
+        console.log('IvInput is less than 0')
+    } 
 return IvInput;
-}
+};
 //reads and returns input for Effort Values (EVs) 
 let EvInput;
 function EvFetcher(){  
     EvInput = parseInt(document.getElementById('Ev').value);
-if(EvInput > 252 ){
-    EvInput = 252;
-    document.getElementById('Ev').value = 252
-    console.log('EvInput is greater than 31')
-    return EvInput;
-} else if (EvInput < 0){
-    EvInput = 0;
-    document.getElementById('Ev').value = 0
-    console.log('EvInput is less than 0')
-} 
+        if(EvInput > 252 ){
+        EvInput = 252;
+        document.getElementById('Ev').value = 252
+        console.log('EvInput is greater than 31')
+        return EvInput;
+    } else if (EvInput < 0){
+        EvInput = 0;
+        document.getElementById('Ev').value = 0
+        console.log('EvInput is less than 0')
+    } 
 return EvInput;
-}
+};
 //lets user input what level their format is using
 let level = 50;
 function getLevel(){
     level = document.getElementById('pokemon-level').value;
-    if(level === "one"){
-        level = 1;
-    } else if (level === "fifty"){
-        level = 50;
-    } else if (level === "one hundred"){
-        level = 100;
-    }
+        if(level === "one"){
+            level = 1;
+        } else if (level === "fifty"){
+            level = 50;
+        } else if (level === "one hundred"){
+            level = 100;
+        }
     return level;
-}
+};
 
 //Pokemon One Autocomplete 
 const inputFirst = document.querySelector("#pokemonOneInput");
 inputFirst.addEventListener("input", pokemonOneInputChange);
-
 getPokemonData();
-
 let pokemonNames = [];
-
 async function getPokemonData(){
     const pokemonRes = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=1302");
-
     const data = await pokemonRes.json();
-
-    pokemonNames = data.results.map((pokemon) => {
-        return pokemon.name;
-
-    });
+        pokemonNames = data.results.map((pokemon) => {
+            return pokemon.name;
+        });
     console.log(data);
     console.log(pokemonNames);
-}
+};
 
 async function pokemonOneSpeedFetcher(pokemonOne){
     const pokemonStat = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonOne)
     const speed = await pokemonStat.json();
-    pokemonOneSpeed = speed.stats[5].base_stat;
-    alert(pokemonOneSpeed);
-    return pokemonOneSpeed;
-}
+    pokemonOneBaseSpeed = speed.stats[5].base_stat;
+    pokemonOneSpeedCalc(pokemonOneBaseSpeed);
+};
 
 function pokemonOneInputChange() {
     removeAutocompleteDropdown();
-
-console.log(inputFirst.value);
-const value = inputFirst.value.toLowerCase();
-if(value.length === 0){
-    return;
-}
-const filteredNames = [];
-
-pokemonNames.forEach((pokemonName) => {
-    if(pokemonName.substr(0, value.length).toLowerCase() === value){
-        filteredNames.push(pokemonName);
+    const value = inputFirst.value.toLowerCase();
+        if(value.length === 0){
+        return;
     }
-})
-console.log(filteredNames);
-createAutocompleteDropdown(filteredNames);
-}
+    const filteredNames = [];
+    pokemonNames.forEach((pokemonName) => {
+            if(pokemonName.substr(0, value.length).toLowerCase() === value){
+            filteredNames.push(pokemonName);
+            }
+        });
+    console.log(filteredNames);
+    createAutocompleteDropdown(filteredNames);
+};
 
 function createAutocompleteDropdown(list){
-const inputFirst = document.createElement('ul');
-inputFirst.className = "autocomplete-list";
-inputFirst.id  = "autocomplete-list"
-
-list.forEach((pokemon) => {
-    const listItem = document.createElement("li");
-    const pokemonOneButton = document.createElement("button");
-    pokemonOneButton.innerHTML = pokemon;
-    pokemonOneButton.addEventListener("click", onPokemonOneButtonClick);
-    listItem.appendChild(pokemonOneButton);
-    inputFirst.appendChild(listItem);
-})
-
-document.querySelector("#autocomplete-wrapper").appendChild(inputFirst);
-}
+    const inputFirst = document.createElement('ul');
+    inputFirst.className = "autocomplete-list";
+    inputFirst.id  = "autocomplete-list"
+    list.forEach((pokemon) => {
+        const listItem = document.createElement("li");
+        const pokemonOneButton = document.createElement("button");
+        pokemonOneButton.innerHTML = pokemon;
+        pokemonOneButton.addEventListener("click", onPokemonOneButtonClick);
+        listItem.appendChild(pokemonOneButton);
+        inputFirst.appendChild(listItem);
+    });
+    document.querySelector("#autocomplete-wrapper").appendChild(inputFirst);
+};
 
 function removeAutocompleteDropdown(){
 const inputFirst = document.querySelector("#autocomplete-list");
-if(inputFirst){
-    inputFirst.remove();
-} 
-}
+    if(inputFirst){
+        inputFirst.remove();
+    } 
+};
 
 //Pokemon two autocomplete 
 const inputSecond = document.querySelector("#pokemonTwoInput");
@@ -143,16 +131,13 @@ getPokemonDataTwo();
 let pokemonTwoNames = [];
 async function getPokemonDataTwo(){
     const pokemonRes = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=1302");
-
     const data = await pokemonRes.json();
-
     pokemonTwoNames = data.results.map((pokemon) => {
         return pokemon.name;
-
     });
     console.log(data);
     console.log(pokemonTwoNames);
-}
+};
 
 async function pokemonTwoSpeedFetcher(pokemonOne){
     const pokemonStat = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonOne)
@@ -160,26 +145,25 @@ async function pokemonTwoSpeedFetcher(pokemonOne){
     pokemonTwoSpeed = speed.stats[5].base_stat;
     alert(pokemonTwoSpeed);
     return pokemonTwoSpeed;
-}
+};
 
 function pokemonTwoInputChange() {
     removeAutocompleteDropdownTwo();
-
-console.log(inputSecond.value);
-const value = inputSecond.value.toLowerCase();
-if(value.length === 0){
-    return;
-}
-const filteredNames = [];
-
-pokemonTwoNames.forEach((pokemonName) => {
-    if(pokemonName.substr(0, value.length).toLowerCase() === value){
-        filteredNames.push(pokemonName);
+    console.log(inputSecond.value);
+    const value = inputSecond.value.toLowerCase();
+    if(value.length === 0){
+        return;
     }
-})
-console.log(filteredNames);
-createAutocompleteDropdownTwo(filteredNames);
-}
+    const filteredNames = [];
+
+    pokemonTwoNames.forEach((pokemonName) => {
+        if(pokemonName.substr(0, value.length).toLowerCase() === value){
+        filteredNames.push(pokemonName);
+        }
+    })
+    console.log(filteredNames);
+    createAutocompleteDropdownTwo(filteredNames);
+};
 
 function createAutocompleteDropdownTwo(list){
     const inputSecond = document.createElement('ul');
@@ -222,4 +206,17 @@ function onPokemonTwoButtonClick(event){
     removeAutocompleteDropdownTwo();
     pokemonTwoSpeedFetcher(pokemonTwo);
 }
+//speed calc
+function pokemonOneSpeedCalc(pokemonOneBaseSpeed){
+    if(nature === "Jolly" || nature === "Naive" || nature === "Timid" || nature === "Hasty"){
+        pokemonOneSpeed = Math.trunc(((pokemonOneBaseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5) * 1.10);
+        console.log(pokemonOneSpeed);
+    } else if(nature === "Brave" || nature === "Quiet" || nature === "Relaxed" || nature === "Sassy"){
+        pokemonOneSpeed = Math.trunc(((pokemonOneBaseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5) - (((pokemonOneBaseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5)*0.1));
+        console.log(pokemonOneSpeed);
+    } else{
+        pokemonOneSpeed = Math.trunc(((pokemonOneBaseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5));
+        console.log(pokemonOneSpeed);  
+    }
 
+}
