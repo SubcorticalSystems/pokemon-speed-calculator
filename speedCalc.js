@@ -1,18 +1,6 @@
 ///https://pokeapi.co/api/v2/pokemon <---api link 
 
-/* logic for speed calculation
-
-if(nature == "Jolly" ){
-        pokemonOneSpeed = Math.trunc(((baseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5) * 1.10);
-        console.log(pokemonOneSpeed);
-    } else {
-        pokemonOneSpeed = Math.trunc(((baseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5));
-        console.log(pokemonOneSpeed);
-    }
-
-*/ 
-
-//checks for nature modifier and calculates increased speed stat by 10%
+//checks for nature modifier
 let pokemonOneNature = "serious";
 let pokemonTwoNature = "serious";
 function getNature(id){
@@ -53,20 +41,37 @@ function getLevel(id){
     } 
 };
 //reads and returns input for Individual Values (IVs)
-let IvInput;
-function IvFetcher(){  
-    IvInput = parseInt(document.getElementById('Iv').value);
-        if(IvInput > 31 ){
-            IvInput = 31;
-            document.getElementById('Iv').value = 31
+let pokemonOneIVs = 0;
+let pokemonTwoIVs = 0;
+function IvFetcher(id){ 
+    if(id == "pokemon-one-IVs") {
+        pokemonOneIVs = parseInt(document.getElementById('pokemon-one-IVs').value);
+        if(pokemonOneIVs > 31 ){
+            pokemonOneIVs = 31;
+            document.getElementById('pokemon-one-IVs').value = 31
             console.log('IvInput is greater than 31')
-            return IvInput;
-    } else if (IvInput < 0){
-        IvInput = 0;
-        document.getElementById('Iv').value = 0
+            return pokemonOneIVs;
+    } else if (pokemonOneIVs < 0){
+        pokemonOneIVs = 0;
+        document.getElementById('pokemon-one-IVs').value = 0
         console.log('IvInput is less than 0')
     } 
-return IvInput;
+        return pokemonOneIVs;
+    } else if (id == "pokemon-two-IVs"){
+        pokemonTwoIVs = parseInt(document.getElementById('pokemon-two-IVs').value);
+        if(pokemonTwoIVs > 31 ){
+            pokemonTwoIVs = 31;
+            document.getElementById('pokemon-two-IVs').value = 31
+            console.log('IvInput is greater than 31')
+            return pokemonTwoIVs;
+    } else if (pokemonTwoIVs < 0){
+        pokemonTwoIVs = 0;
+        document.getElementById('pokemon-two-IVs').value = 0
+        console.log('IvInput is less than 0')
+    } 
+        return pokemonTwoIVs;
+    }
+   
 };
 //reads and returns input for Effort Values (EVs) 
 let EvInput;
@@ -105,6 +110,7 @@ async function pokemonOneSpeedFetcher(pokemonOne){
     const speed = await pokemonStat.json();
     pokemonOneBaseSpeed = speed.stats[5].base_stat;
     pokemonOneSpeedCalc(pokemonOneBaseSpeed);
+    console.log(pokemonOneBaseSpeed);
 };
 
 function pokemonOneInputChange() {
@@ -229,14 +235,14 @@ function onPokemonTwoButtonClick(event){
 }
 //speed calc
 function pokemonOneSpeedCalc(pokemonOneBaseSpeed){
-    if(nature === "Jolly" || nature === "Naive" || nature === "Timid" || nature === "Hasty"){
-        pokemonOneSpeed = Math.trunc(((pokemonOneBaseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5) * 1.10);
+    if(pokemonOneNature === "Jolly" || pokemonOneNature === "Naive" || pokemonOneNature === "Timid" || pokemonOneNature === "Hasty"){
+        pokemonOneSpeed = Math.trunc(((pokemonOneBaseSpeed * 2 + pokemonOneIVs + (EvInput/4)) * pokemonOneLevel/100 + 5) * 1.10);
         console.log(pokemonOneSpeed);
-    } else if(nature === "Brave" || nature === "Quiet" || nature === "Relaxed" || nature === "Sassy"){
-        pokemonOneSpeed = Math.trunc(((pokemonOneBaseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5) - (((pokemonOneBaseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5)*0.1));
+    } else if(pokemonOneNature === "Brave" || pokemonOneNature === "Quiet" || pokemonOneNature === "Relaxed" || pokemonOneNature === "Sassy"){
+        pokemonOneSpeed = Math.trunc(((pokemonOneBaseSpeed * 2 + pokemonOneIVs + (EvInput/4)) * pokemonOneLevel/100 + 5) - (((pokemonOneBaseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5)*0.1));
         console.log(pokemonOneSpeed);
     } else{
-        pokemonOneSpeed = Math.trunc(((pokemonOneBaseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5));
+        pokemonOneSpeed = Math.trunc(((pokemonOneBaseSpeed * 2 + pokemonOneIVs + (EvInput/4)) * pokemonOneLevel/100 + 5));
         console.log(pokemonOneSpeed);  
     }
 
