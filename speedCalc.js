@@ -46,7 +46,7 @@ let pokemonTwoIVs = 0;
 function IvFetcher(id){ 
     if(id == "pokemon-one-IVs") {
         pokemonOneIVs = parseInt(document.getElementById('pokemon-one-IVs').value);
-        if(pokemonOneIVs > 31 ){
+        if(pokemonOneIVs > 31){
             pokemonOneIVs = 31;
             document.getElementById('pokemon-one-IVs').value = 31
             console.log('IvInput is greater than 31')
@@ -84,11 +84,17 @@ function EvFetcher(id){
             document.getElementById('pokemon-one-EVs').value = 252
             console.log('EvInput is greater than 31')
             return pokemonOneEVs;
-    } else if (pokemonOneEVs < 0){
-        pokemonOneEVs = 0;
-        document.getElementById('pokemon-one-EVs').value = 0
-        console.log('EvInput is less than 0')
-    } 
+            } else if (pokemonOneEVs < 0){
+                pokemonOneEVs = 0;
+                document.getElementById('pokemon-one-EVs').value = 0
+                console.log('EvInput is less than 0')
+                } else if (!pokemonOneEVs){
+                    pokemonOneEVs = 0;
+                }
+    if(pokemonOne){
+        console.log("HELLO")
+        pokemonOneSpeedCalc(pokemonOneBaseSpeed);
+    }
     return pokemonOneEVs;
     } else if(id == "pokemon-two-EVs"){
         pokemonTwoEVs = parseInt(document.getElementById('pokemon-two-EVs').value);
@@ -122,12 +128,15 @@ async function getPokemonData(){
     console.log(pokemonNames);
 };
 
+
+let pokemonOneBaseSpeed;
 async function pokemonOneSpeedFetcher(pokemonOne){
     const pokemonStat = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonOne)
     const speed = await pokemonStat.json();
     pokemonOneBaseSpeed = speed.stats[5].base_stat;
     pokemonOneSpeedCalc(pokemonOneBaseSpeed);
     console.log(pokemonOneBaseSpeed + " Base Speed");
+    return pokemonOneBaseSpeed;
 };
 
 function pokemonOneInputChange() {
@@ -186,9 +195,9 @@ async function getPokemonDataTwo(){
 async function pokemonTwoSpeedFetcher(pokemonOne){
     const pokemonStat = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonOne)
     const speed = await pokemonStat.json();
-    pokemonTwoBaseSpeed = speed.stats[5].base_stat;
+    let pokemonTwoBaseSpeed = speed.stats[5].base_stat;
     pokemonTwoSpeedCalc(pokemonTwoBaseSpeed);
-    console.log(pokemonTwoSpeed + " Base Speed");
+    console.log(pokemonTwoBaseSpeed + " Base Speed");
 };
 
 function pokemonTwoInputChange() {
@@ -251,6 +260,7 @@ function onPokemonTwoButtonClick(event){
     pokemonTwoSpeedFetcher(pokemonTwo);
 }
 //speed calc
+let pokemonOneSpeed;
 function pokemonOneSpeedCalc(pokemonOneBaseSpeed){
     if(pokemonOneNature === "Jolly" || pokemonOneNature === "Naive" || pokemonOneNature === "Timid" || pokemonOneNature === "Hasty"){
         pokemonOneSpeed = Math.trunc(((pokemonOneBaseSpeed * 2 + pokemonOneIVs + (pokemonOneEVs/4)) * pokemonOneLevel/100 + 5) * 1.10);
@@ -264,7 +274,7 @@ function pokemonOneSpeedCalc(pokemonOneBaseSpeed){
     }
 };
 
-
+let pokemonTwoSpeed;
 function pokemonTwoSpeedCalc(pokemonTwoBaseSpeed){
     if(pokemonTwoNature === "Jolly" || pokemonTwoNature === "Naive" || pokemonTwoNature === "Timid" || pokemonTwoNature === "Hasty"){
         pokemonTwoSpeed = Math.trunc(((pokemonTwoBaseSpeed * 2 + pokemonTwoIVs + (pokemonTwoEVs/4)) * pokemonTwoLevel/100 + 5) * 1.10);

@@ -28,40 +28,54 @@ body{
 .level-wrapper{
   display: flex;
   height: 3rem;
-  
   border: unset;
   padding-left: 1rem;
   width: 100%;
   align-items: center;
-  justify-content: center;
 }
 .level-title{
   border: unset;
   padding-right: 0.5rem;
 }
 
-#pokemonOneWrap, #pokemonTwoWrap{
+#pokemon-one-wrap, #pokemon-two-wrap{
   display: flex;
   width: 100%;
   justify-content: center;
 }
 
-#pokemonOneContainer{
+#pokemon-one-wrap{
+  background-color: lightcoral;
+}
+
+#pokemon-two-wrap{
+  background-color: palevioletred;
+}
+
+#pokemon-one-spec-wrap{
   margin-right: 2rem;
   width: 100%;
+  background-color: lightcyan;
  
 }
 
-#main{
+#pokemon-content{
   margin: 5% 8%;
-  background-color: rgb(234, 231, 231);
+  background-color: black;
   display: flex;
   overflow: hidden;
+  width: 80%;
+  height: 287px;
 }
+
+.IVs-title{
+  padding-right: 6.5px;
+}
+
 
 input{
   border: unset;
-  background: rgb(192, 192, 193);
+  background: lightsalmon;
   padding: 0.5rem;
 }
 
@@ -93,7 +107,7 @@ input{
 }
 
 .autocomplete-list li:hover{
-  background-color: red;
+  background-color: lightsalmon;
 }
 
 .autocomplete-list button{

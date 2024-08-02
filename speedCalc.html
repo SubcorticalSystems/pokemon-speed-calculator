@@ -12,10 +12,10 @@
 <header>
     <h1>Pokemon Speed Calculator</h1>
 </header>
-<!--Main Content includes both "pokemon-one-wrap" and "pokemon-two-wrap"-->
-<div id="main">
+<!--pokemon-content includes both "pokemon-one-wrap" and "pokemon-two-wrap"-->
+<div id="pokemon-content">
 <!--first pokemon selection data-->
-<div id="pokemonOneWrap">
+<div id="pokemon-one-wrap">
 
 <form action="" autocomplete="off">
     <div  class="autocomplete-wrapper" id="pokemon-one-autocomplete-wrapper">
@@ -68,11 +68,11 @@
 </div>
 <!--Collecting Individual Values 0-31 (IVs) and Effort Values 0-252 (EVs)-->
     <div>
-        <label for="Iv">Enter IVs</label>
+        <label for="IVs" class="IVs-title">Enter IVs</label>
         <input type="number" name="IVs" class="input-box" id="pokemon-one-IVs" min="0" max="31" placeholder="0-31" onkeyup="IvFetcher(this.id)" onclick="IvFetcher(this.id)">
     </div>
     <div>
-        <label for="Ev">Enter EVs</label>
+        <label for="EVs">Enter EVs</label>
         <input type="number" name="EVs" class="input-box" id="pokemon-one-EVs" min="0" max="252" placeholder="0-252" onkeyup="EvFetcher(this.id)" onclick="EvFetcher(this.id)">
     </div>
    
@@ -81,7 +81,7 @@
 </div>
 <!------------------------------------Pokemon One above Pokemon Two Below----------------------------------------------------->
 <!--Second pokemon selection data-->
-<div id="pokemonTwoWrap">
+<div id="pokemon-two-wrap">
     <!--Determining pokemon choice-->
     <form action="" autocomplete="off">
         <div class="autocomplete-wrapper" id="pokemon-two-autocomplete-wrapper">
@@ -89,7 +89,7 @@
     </div>
     <!--<button type="submit" class="btn-submit">Send</button>-->
     </form>
-    <div id="pokemonOneSpecWrap">
+    <div id="pokemon-one-spec-wrap">
         <!--Collecting Pokemon's level-->
          <div class="level-wrapper">
             <p class="level-title">Level</p>
@@ -133,11 +133,11 @@
     </div>
     <!--Collecting Individual Values 0-31 (IVs) and Effort Values 0-252 (EVs)-->
         <div>
-            <label for="Iv">Enter IVs</label>
+            <label for="IVs" class="IVs-title">Enter IVs</label>
             <input type="number" name="IVs" class="input-box" id="pokemon-two-IVs" min="0" max="31" placeholder="0-31" onkeyup="IvFetcher(this.id)" onclick="IvFetcher(this.id)">
         </div>
         <div>
-            <label for="Ev">Enter EVs</label>
+            <label for="EVs">Enter EVs</label>
             <input type="number" name="EVs" class="input-box" id="pokemon-two-EVs" min="0" max="252" placeholder="0-252" onkeyup="EvFetcher(this.id)" onclick="EvFetcher(this.id)">
         </div>
        
