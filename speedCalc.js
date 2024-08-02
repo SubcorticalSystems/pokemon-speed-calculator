@@ -74,20 +74,37 @@ function IvFetcher(id){
    
 };
 //reads and returns input for Effort Values (EVs) 
-let EvInput;
-function EvFetcher(){  
-    EvInput = parseInt(document.getElementById('Ev').value);
-        if(EvInput > 252 ){
-        EvInput = 252;
-        document.getElementById('Ev').value = 252
-        console.log('EvInput is greater than 31')
-        return EvInput;
-    } else if (EvInput < 0){
-        EvInput = 0;
-        document.getElementById('Ev').value = 0
+let pokemonOneEVs = 0;
+let pokemonTwoEVs = 0;
+function EvFetcher(id){
+    if(id == "pokemon-one-EVs"){
+        pokemonOneEVs = parseInt(document.getElementById('pokemon-one-EVs').value);
+        if(pokemonOneEVs > 252 ){
+            pokemonOneEVs = 252;
+            document.getElementById('pokemon-one-EVs').value = 252
+            console.log('EvInput is greater than 31')
+            return pokemonOneEVs;
+    } else if (pokemonOneEVs < 0){
+        pokemonOneEVs = 0;
+        document.getElementById('pokemon-one-EVs').value = 0
         console.log('EvInput is less than 0')
     } 
-return EvInput;
+    return pokemonOneEVs;
+    } else if(id == "pokemon-two-EVs"){
+        pokemonTwoEVs = parseInt(document.getElementById('pokemon-two-EVs').value);
+        if(pokemonTwoEVs > 252 ){
+            pokemonTwoEVs = 252;
+        document.getElementById('pokemon-two-EVs').value = 252
+        console.log('EvInput is greater than 31')
+        return pokemonTwoEVs;
+    } else if (pokemonTwoEVs < 0){
+        pokemonTwoEVs = 0;
+        document.getElementById('pokemon-two-EVs').value = 0
+        console.log('EvInput is less than 0')
+    } 
+    return pokemonTwoEVs;
+    }
+   
 };
 
 //Pokemon One Autocomplete 
@@ -110,7 +127,7 @@ async function pokemonOneSpeedFetcher(pokemonOne){
     const speed = await pokemonStat.json();
     pokemonOneBaseSpeed = speed.stats[5].base_stat;
     pokemonOneSpeedCalc(pokemonOneBaseSpeed);
-    console.log(pokemonOneBaseSpeed);
+    console.log(pokemonOneBaseSpeed + " Base Speed");
 };
 
 function pokemonOneInputChange() {
@@ -152,7 +169,7 @@ const inputFirst = document.querySelector("#autocomplete-list");
 };
 
 //Pokemon two autocomplete 
-const inputSecond = document.querySelector("#pokemonTwoInput");
+const inputSecond = document.querySelector("#pokemon-two-input");
 inputSecond.addEventListener("input", pokemonTwoInputChange);
 getPokemonDataTwo();
 let pokemonTwoNames = [];
@@ -169,9 +186,9 @@ async function getPokemonDataTwo(){
 async function pokemonTwoSpeedFetcher(pokemonOne){
     const pokemonStat = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonOne)
     const speed = await pokemonStat.json();
-    pokemonTwoSpeed = speed.stats[5].base_stat;
-    alert(pokemonTwoSpeed);
-    return pokemonTwoSpeed;
+    pokemonTwoBaseSpeed = speed.stats[5].base_stat;
+    pokemonTwoSpeedCalc(pokemonTwoBaseSpeed);
+    console.log(pokemonTwoSpeed + " Base Speed");
 };
 
 function pokemonTwoInputChange() {
@@ -236,14 +253,27 @@ function onPokemonTwoButtonClick(event){
 //speed calc
 function pokemonOneSpeedCalc(pokemonOneBaseSpeed){
     if(pokemonOneNature === "Jolly" || pokemonOneNature === "Naive" || pokemonOneNature === "Timid" || pokemonOneNature === "Hasty"){
-        pokemonOneSpeed = Math.trunc(((pokemonOneBaseSpeed * 2 + pokemonOneIVs + (EvInput/4)) * pokemonOneLevel/100 + 5) * 1.10);
-        console.log(pokemonOneSpeed);
+        pokemonOneSpeed = Math.trunc(((pokemonOneBaseSpeed * 2 + pokemonOneIVs + (pokemonOneEVs/4)) * pokemonOneLevel/100 + 5) * 1.10);
+        console.log(pokemonOneSpeed + " Final Speed");  
     } else if(pokemonOneNature === "Brave" || pokemonOneNature === "Quiet" || pokemonOneNature === "Relaxed" || pokemonOneNature === "Sassy"){
-        pokemonOneSpeed = Math.trunc(((pokemonOneBaseSpeed * 2 + pokemonOneIVs + (EvInput/4)) * pokemonOneLevel/100 + 5) - (((pokemonOneBaseSpeed * 2 + IvInput + (EvInput/4)) * level/100 + 5)*0.1));
-        console.log(pokemonOneSpeed);
+        pokemonOneSpeed = Math.trunc(((pokemonOneBaseSpeed * 2 + pokemonOneIVs + (pokemonOneEVs/4)) * pokemonOneLevel/100 + 5) - (((pokemonOneBaseSpeed * 2 + pokemonOneIVs + (pokemonOneEVs/4)) * pokemonOneLevel/100 + 5)*0.1));
+        console.log(pokemonOneSpeed + " Final Speed");  
     } else{
-        pokemonOneSpeed = Math.trunc(((pokemonOneBaseSpeed * 2 + pokemonOneIVs + (EvInput/4)) * pokemonOneLevel/100 + 5));
-        console.log(pokemonOneSpeed);  
+        pokemonOneSpeed = Math.trunc(((pokemonOneBaseSpeed * 2 + pokemonOneIVs + (pokemonOneEVs/4)) * pokemonOneLevel/100 + 5));
+        console.log(pokemonOneSpeed + " Final Speed");  
     }
+};
 
-}
+
+function pokemonTwoSpeedCalc(pokemonTwoBaseSpeed){
+    if(pokemonTwoNature === "Jolly" || pokemonTwoNature === "Naive" || pokemonTwoNature === "Timid" || pokemonTwoNature === "Hasty"){
+        pokemonTwoSpeed = Math.trunc(((pokemonTwoBaseSpeed * 2 + pokemonTwoIVs + (pokemonTwoEVs/4)) * pokemonTwoLevel/100 + 5) * 1.10);
+        console.log(pokemonTwoSpeed + " Pokemon Two Final Speed"); 
+    } else if(pokemonTwoNature === "Brave" || pokemonTwoNature === "Quiet" || pokemonTwoNature === "Relaxed" || pokemonTwoNature === "Sassy"){
+        pokemonTwoSpeed = Math.trunc(((pokemonTwoBaseSpeed * 2 + pokemonTwoIVs + (pokemonTwoEVs/4)) * pokemonTwoLevel/100 + 5) - (((pokemonTwoBaseSpeed * 2 + pokemonTwoIVs + (pokemonTwoEVs/4)) * pokemonTwoLevel/100 + 5)*0.1));
+        console.log(pokemonTwoSpeed + " Pokemon Two Final Speed"); 
+    } else{
+        pokemonTwoSpeed = Math.trunc(((pokemonTwoBaseSpeed * 2 + pokemonTwoIVs + (pokemonTwoEVs/4)) * pokemonTwoLevel/100 + 5));
+        console.log(pokemonTwoSpeed + " Pokemon Two Final Speed");  
+    }
+};

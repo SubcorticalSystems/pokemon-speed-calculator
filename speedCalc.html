@@ -73,7 +73,7 @@
     </div>
     <div>
         <label for="Ev">Enter EVs</label>
-        <input type="number" name="EVs" class="input-box" id="Ev" min="0" max="252" placeholder="0-252" onkeyup="EvFetcher()" onclick="EvFetcher()">
+        <input type="number" name="EVs" class="input-box" id="pokemon-one-EVs" min="0" max="252" placeholder="0-252" onkeyup="EvFetcher(this.id)" onclick="EvFetcher(this.id)">
     </div>
    
 
@@ -85,7 +85,7 @@
     <!--Determining pokemon choice-->
     <form action="" autocomplete="off">
         <div class="autocomplete-wrapper" id="pokemon-two-autocomplete-wrapper">
-        <input id="pokemonTwoInput" type="text" placeholder="Enter Second Pokemon" >
+        <input id="pokemon-two-input" type="text" placeholder="Enter Second Pokemon" >
     </div>
     <!--<button type="submit" class="btn-submit">Send</button>-->
     </form>
@@ -138,7 +138,7 @@
         </div>
         <div>
             <label for="Ev">Enter EVs</label>
-            <input type="number" name="EVs" class="input-box" id="Ev" min="0" max="252" placeholder="0-252" onkeyup="EvFetcher()" onclick="EvFetcher()">
+            <input type="number" name="EVs" class="input-box" id="pokemon-two-EVs" min="0" max="252" placeholder="0-252" onkeyup="EvFetcher(this.id)" onclick="EvFetcher(this.id)">
         </div>
        
     
