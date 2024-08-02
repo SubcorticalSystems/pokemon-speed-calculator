@@ -13,10 +13,44 @@ if(nature == "Jolly" ){
 */ 
 
 //checks for nature modifier and calculates increased speed stat by 10%
-let nature;
-function getNature(){
-    nature = document.getElementById('pokemon-nature').value;
-    return nature;
+let pokemonOneNature = "serious";
+let pokemonTwoNature = "serious";
+function getNature(id){
+    console.log(id)
+    if(id == "pokemon-one-nature"){
+        pokemonOneNature = document.getElementById('pokemon-one-nature').value;
+        return pokemonOneNature;
+    } else if(id == "pokemon-two-nature"){
+        pokemonTwoNature = document.getElementById('pokemon-two-nature').value;
+        return pokemonTwoNature;
+    }
+   
+};
+//lets user input what level their format is using
+let pokemonOneLevel = 50;
+let pokemonTwoLevel = 50;
+function getLevel(id){
+    if(id == "pokemon-one-level"){
+        pokemonOneLevel = document.getElementById('pokemon-one-level').value;
+        if(pokemonOneLevel === "one"){
+            pokemonOneLevel = 1;
+        } else if (pokemonOneLevel === "fifty"){
+            pokemonOneLevel = 50;
+        } else if (pokemonOneLevel === "one hundred"){
+            pokemonOneLevel = 100;
+        }
+    return pokemonOneLevel;
+    } else if (id == "pokemon-two-level"){
+        pokemonTwoLevel = document.getElementById('pokemon-two-level').value;
+        if(pokemonTwoLevel === "one"){
+            pokemonTwoLevel = 1;
+        } else if (pokemonTwoLevel === "fifty"){
+            pokemonTwoLevel = 50;
+        } else if (pokemonTwoLevel === "one hundred"){
+            pokemonTwoLevel = 100;
+        }
+    return pokemonTwoLevel;
+    } 
 };
 //reads and returns input for Individual Values (IVs)
 let IvInput;
@@ -50,22 +84,9 @@ function EvFetcher(){
     } 
 return EvInput;
 };
-//lets user input what level their format is using
-let level = 50;
-function getLevel(){
-    level = document.getElementById('pokemon-level').value;
-        if(level === "one"){
-            level = 1;
-        } else if (level === "fifty"){
-            level = 50;
-        } else if (level === "one hundred"){
-            level = 100;
-        }
-    return level;
-};
 
 //Pokemon One Autocomplete 
-const inputFirst = document.querySelector("#pokemonOneInput");
+const inputFirst = document.querySelector("#pokemon-one-input");
 inputFirst.addEventListener("input", pokemonOneInputChange);
 getPokemonData();
 let pokemonNames = [];
@@ -114,7 +135,7 @@ function createAutocompleteDropdown(list){
         listItem.appendChild(pokemonOneButton);
         inputFirst.appendChild(listItem);
     });
-    document.querySelector("#autocomplete-wrapper").appendChild(inputFirst);
+    document.querySelector("#pokemon-one-autocomplete-wrapper").appendChild(inputFirst);
 };
 
 function removeAutocompleteDropdown(){
@@ -177,7 +198,7 @@ function createAutocompleteDropdownTwo(list){
             listItem.appendChild(pokemonTwoButton);
             inputSecond.appendChild(listItem);
     })
-    document.querySelector("#autocomplete-wrapper-two").appendChild(inputSecond);
+    document.querySelector("#pokemon-two-autocomplete-wrapper").appendChild(inputSecond);
 }
 
 function removeAutocompleteDropdownTwo(){
