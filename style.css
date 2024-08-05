@@ -29,7 +29,7 @@ body{
   display: flex;
   height: 3rem;
   border: unset;
-  padding-left: 1rem;
+  padding: unset;
   width: 100%;
   align-items: center;
 }
