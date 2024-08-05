@@ -17,7 +17,7 @@
 <!--first pokemon selection data-->
 <div id="pokemon-one-wrap">
 
-<form action="" autocomplete="off">
+<form action="" autocomplete="off" >
     <div  class="autocomplete-wrapper" id="pokemon-one-autocomplete-wrapper">
     <input id="pokemon-one-input" type="text" placeholder="Enter First Pokemon" >
 </div>
@@ -29,14 +29,14 @@
      <div class="level-wrapper" id="pokemon-one-level-wrapper">
         <p class="level-title">Level</p>
         <select name="level" class="level-select" id="pokemon-one-level" onchange="getLevel(this.id)">
-            <option value="one">1</option>
+            <option value="five">5</option>
             <option value="fifty" selected>50</option>
             <option value="one hundred">100</option>
         </select>
     </div>
 <!--Collecting Nature information-->
     <div class="nature-wrapper" id="pokemon-one-nature-wrapper">
-        <p>Nature</p>
+        <p class="nature-title">Nature</p>
     <select name="natures" class="nature-select" id="pokemon-one-nature"  onchange="getNature(this.id)">
         <option value="none"></option>
         <option value="Adament">Adament</option>
@@ -67,11 +67,11 @@
     </select>
 </div>
 <!--Collecting Individual Values 0-31 (IVs) and Effort Values 0-252 (EVs)-->
-    <div>
+    <div class="IVs-wrapper">
         <label for="IVs" class="IVs-title">Enter IVs</label>
         <input type="number" name="IVs" class="input-box" id="pokemon-one-IVs" min="0" max="31" placeholder="0-31" onkeyup="IvFetcher(this.id)" onclick="IvFetcher(this.id)">
     </div>
-    <div>
+    <div class="EVs-wrapper">
         <label for="EVs">Enter EVs</label>
         <input type="number" name="EVs" class="input-box" id="pokemon-one-EVs" min="0" max="252" placeholder="0-252" onkeyup="EvFetcher(this.id)" onclick="EvFetcher(this.id)">
     </div>
@@ -83,25 +83,27 @@
 <!--Second pokemon selection data-->
 <div id="pokemon-two-wrap">
     <!--Determining pokemon choice-->
-    <form action="" autocomplete="off">
+    <div class="pokemon-input-container">
+    <form action="" autocomplete="off" >
         <div class="autocomplete-wrapper" id="pokemon-two-autocomplete-wrapper">
         <input id="pokemon-two-input" type="text" placeholder="Enter Second Pokemon" >
     </div>
+</div>
     <!--<button type="submit" class="btn-submit">Send</button>-->
     </form>
-    <div id="pokemon-one-spec-wrap">
+    <div id="pokemon-two-spec-wrap">
         <!--Collecting Pokemon's level-->
          <div class="level-wrapper">
             <p class="level-title">Level</p>
             <select name="level" class="level-select" id="pokemon-two-level" onchange="getLevel(this.id)">
-                <option value="one">1</option>
+                <option value="five">5</option>
                 <option value="fifty" selected>50</option>
                 <option value="one hundred">100</option>
             </select>
         </div>
     <!--Collecting Nature information-->
         <div class="nature-wrapper">
-            <p>Nature</p>
+            <p class="nature-title">Nature</p>
         <select name="natures" class="nature-select" id="pokemon-two-nature" onchange="getNature(this.id)">
             <option value="none"></option>
             <option value="Adament">Adament</option>
@@ -132,16 +134,16 @@
         </select>
     </div>
     <!--Collecting Individual Values 0-31 (IVs) and Effort Values 0-252 (EVs)-->
-        <div>
+        <div class="IVs-wrapper">
             <label for="IVs" class="IVs-title">Enter IVs</label>
             <input type="number" name="IVs" class="input-box" id="pokemon-two-IVs" min="0" max="31" placeholder="0-31" onkeyup="IvFetcher(this.id)" onclick="IvFetcher(this.id)">
         </div>
-        <div>
+        <div class="EVs-wrapper">
             <label for="EVs">Enter EVs</label>
             <input type="number" name="EVs" class="input-box" id="pokemon-two-EVs" min="0" max="252" placeholder="0-252" onkeyup="EvFetcher(this.id)" onclick="EvFetcher(this.id)">
         </div>
        
-    
+    <input type="radio" name="" id="">
     </div>
     </div>
 </div>

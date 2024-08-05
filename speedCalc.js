@@ -20,8 +20,8 @@ let pokemonTwoLevel = 50;
 function getLevel(id){
     if(id == "pokemon-one-level"){
         pokemonOneLevel = document.getElementById('pokemon-one-level').value;
-        if(pokemonOneLevel === "one"){
-            pokemonOneLevel = 1;
+        if(pokemonOneLevel === "five"){
+            pokemonOneLevel = 5;
         } else if (pokemonOneLevel === "fifty"){
             pokemonOneLevel = 50;
         } else if (pokemonOneLevel === "one hundred"){
@@ -30,8 +30,8 @@ function getLevel(id){
     return pokemonOneLevel;
     } else if (id == "pokemon-two-level"){
         pokemonTwoLevel = document.getElementById('pokemon-two-level').value;
-        if(pokemonTwoLevel === "one"){
-            pokemonTwoLevel = 1;
+        if(pokemonTwoLevel === "five"){
+            pokemonTwoLevel = 5;
         } else if (pokemonTwoLevel === "fifty"){
             pokemonTwoLevel = 50;
         } else if (pokemonTwoLevel === "one hundred"){
@@ -131,7 +131,7 @@ async function getPokemonData(){
 
 let pokemonOneBaseSpeed;
 async function pokemonOneSpeedFetcher(pokemonOne){
-    const pokemonStat = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonOne)
+    const pokemonStat = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonOne.toLowerCase())
     const speed = await pokemonStat.json();
     pokemonOneBaseSpeed = speed.stats[5].base_stat;
     pokemonOneSpeedCalc(pokemonOneBaseSpeed);
@@ -162,7 +162,7 @@ function createAutocompleteDropdown(list){
     list.forEach((pokemon) => {
         const listItem = document.createElement("li");
         const pokemonOneButton = document.createElement("button");
-        pokemonOneButton.innerHTML = pokemon;
+        pokemonOneButton.innerHTML = pokemon[0].toUpperCase() + pokemon.slice(1);
         pokemonOneButton.addEventListener("click", onPokemonOneButtonClick);
         listItem.appendChild(pokemonOneButton);
         inputFirst.appendChild(listItem);
@@ -193,11 +193,11 @@ async function getPokemonDataTwo(){
 };
 
 async function pokemonTwoSpeedFetcher(pokemonOne){
-    const pokemonStat = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonOne)
+    const pokemonStat = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonOne.toLowerCase())
     const speed = await pokemonStat.json();
     let pokemonTwoBaseSpeed = speed.stats[5].base_stat;
     pokemonTwoSpeedCalc(pokemonTwoBaseSpeed);
-    console.log(pokemonTwoBaseSpeed + " Base Speed");
+    console.log(pokemonTwoBaseSpeed + " Two Base Speed" );
 };
 
 function pokemonTwoInputChange() {
@@ -225,7 +225,7 @@ function createAutocompleteDropdownTwo(list){
         list.forEach((pokemon) => {
             const listItem = document.createElement("li");
             const pokemonTwoButton = document.createElement("button");
-            pokemonTwoButton.innerHTML = pokemon;
+            pokemonTwoButton.innerHTML = pokemon[0].toUpperCase() + pokemon.slice(1);
             pokemonTwoButton.addEventListener("click", onPokemonTwoButtonClick);
             listItem.appendChild(pokemonTwoButton);
             inputSecond.appendChild(listItem);

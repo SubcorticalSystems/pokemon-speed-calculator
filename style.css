@@ -18,54 +18,45 @@ input[type=number] {
 
 body{
   font-family: Arial, Arial, Helvetica, sans-serif;
+  background-color: #F3FEB8;
 }
 
-.nature-wrapper{
-  display: flex;
-  height: 3rem;
-  align-items: center;
-}
-.level-wrapper{
-  display: flex;
-  height: 3rem;
-  border: unset;
-  padding: unset;
-  width: 100%;
-  align-items: center;
-}
-.level-title{
-  border: unset;
-  padding-right: 0.5rem;
+
+
+#pokemon-content{
+  width: 50%;
 }
 
 #pokemon-one-wrap, #pokemon-two-wrap{
   display: flex;
   width: 100%;
-  justify-content: center;
+  justify-content: left;
 }
 
 #pokemon-one-wrap{
-  background-color: lightcoral;
+  background-color: #FFB22C;
+  
 }
 
 #pokemon-two-wrap{
-  background-color: palevioletred;
+  background-color: #FF4C4C;
 }
 
-#pokemon-one-spec-wrap{
-  margin-right: 2rem;
-  width: 100%;
-  background-color: lightcyan;
- 
+#pokemon-one-spec-wrap, #pokemon-two-spec-wrap{
+  margin-top: 10px;
+  margin-left: 2rem;
 }
-
 #pokemon-content{
-  margin: 5% 8%;
+  margin: auto;
   background-color: black;
   display: flex;
   overflow: hidden;
-  width: 80%;
-  height: 287px;
+  width: 75vw;  
+  height: 41vh;
+}
+
+.pokemon-input-container{
+  
 }
 
 .IVs-title{
@@ -75,7 +66,10 @@ body{
 
 input{
   border: unset;
-  background: lightsalmon;
+  box-shadow: 1px 2px 3px 1px #3C3013,
+inset 1px 1px 1px 0.5px #4C4023,
+inset -1px -1px 1px 0.5px #8C8083;
+  background: rgb(245, 240, 240);
   padding: 0.5rem;
 }
 
@@ -90,6 +84,8 @@ input{
 
 .autocomplete-wrapper{
   display: inline-block;
+  margin-left: 10px;
+  margin-top: 10px;
   position: relative;
 }
 
@@ -117,4 +113,30 @@ input{
   width: 100%;
   text-align: left;
   padding: 0.5rem;
+}
+
+.nature-wrapper{
+  display: flex;
+  height: 1rem;
+  align-items: center;
+}
+.level-wrapper{
+  display: flex;
+  height: 2rem;
+  border: unset;
+  padding: unset;
+  width: 100%;
+  align-items: center;
+}
+.level-title, .nature-title{
+  border: unset;
+  padding-right: 0.5rem;
+}
+
+.input-box{
+  height: 1.3rem;
+}
+
+.EVs-wrapper, .IVs-wrapper{
+  margin-top: 10px;
 }
