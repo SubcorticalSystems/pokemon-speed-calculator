@@ -40,6 +40,13 @@ function getLevel(id){
     return pokemonTwoLevel;
     } 
 };
+//checks for ability
+let pokemonOneAbility = "not-applicable"
+let pokemonTwoAbility = "not-applicable"
+function getAbility(id){
+    
+}
+
 //reads and returns input for Individual Values (IVs)
 let pokemonOneIVs = 0;
 let pokemonTwoIVs = 0;
@@ -271,7 +278,9 @@ function pokemonOneSpeedCalc(pokemonOneBaseSpeed){
     } else{
         pokemonOneSpeed = Math.trunc(((pokemonOneBaseSpeed * 2 + pokemonOneIVs + (pokemonOneEVs/4)) * pokemonOneLevel/100 + 5));
         console.log(pokemonOneSpeed + " Final Speed");  
+        updateCalc(pokemonOneSpeed);
     }
+    
 };
 
 let pokemonTwoSpeed;
@@ -287,3 +296,8 @@ function pokemonTwoSpeedCalc(pokemonTwoBaseSpeed){
         console.log(pokemonTwoSpeed + " Pokemon Two Final Speed");  
     }
 };
+
+function updateCalc(pokemonOneSpeed){
+    const updateText = document.getElementById("insert-test");
+    updateText.innerHTML = pokemonOneSpeed;
+}

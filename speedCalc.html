@@ -11,6 +11,8 @@
 <!--Top of screen content-->
 <header>
     <h1>Pokemon Speed Calculator</h1>
+    <p id="insert-test">Calculation will be shown here</p>
+    <p>Hello</p>
 </header>
 <!--pokemon-content includes both "pokemon-one-wrap" and "pokemon-two-wrap"-->
 <div id="pokemon-content">
@@ -65,6 +67,26 @@
         <option value="Serious">Serious</option>
         <option value="Timid">Timid</option>
     </select>
+</div>
+<!--Ability-->
+<div class="ability-wrapper">
+    <p class="ability-title">Ability</p>
+<select name="abilities" class="ability-select" id="pokemon-one-ability" onchange="getAbility(this.id)">
+    <option value="none"></option>
+    <option value="Unburden">Unburden</option>
+    <option value="Quick Feet">Quick Feet</option>
+    <option value="Speed Boost">Speed Boost</option>
+    <option value="Surge Surfer">Surge Surfer</option>
+    <option value="Weak Armor">Weak Armor</option>
+    <option value="Swift Swim">Swift Swim</option>
+    <option value="Chlorophyll">Chlorophyll</option>
+    <option value="Sand Rush">Sand Rush</option>
+    <option value="Slush Rush">Slush Rush</option>
+    <option value="Motor Drive">Motor Drive</option>
+    <option value="Steadfast">Steadfast</option>
+    <option value="Steam Engine">Steam Engine</option>
+    <option value="Moody">Moody</option>
+</select>
 </div>
 <!--Collecting Individual Values 0-31 (IVs) and Effort Values 0-252 (EVs)-->
     <div class="IVs-wrapper">
@@ -133,6 +155,26 @@
             <option value="Timid">Timid</option>
         </select>
     </div>
+    <!--Ability-->
+    <div class="ability-wrapper">
+        <p class="ability-title">Ability</p>
+    <select name="abilities" class="ability-select" id="pokemon-two-ability" onchange="getAbility(this.id)">
+        <option value="not-applicable"></option>
+        <option value="Unburden">Unburden</option>
+        <option value="Quick Feet">Quick Feet</option>
+        <option value="Speed Boost">Speed Boost</option>
+        <option value="Surge Surfer">Surge Surfer</option>
+        <option value="Weak Armor">Weak Armor</option>
+        <option value="Swift Swim">Swift Swim</option>
+        <option value="Chlorophyll">Chlorophyll</option>
+        <option value="Sand Rush">Sand Rush</option>
+        <option value="Slush Rush">Slush Rush</option>
+        <option value="Motor Drive">Motor Drive</option>
+        <option value="Steadfast">Steadfast</option>
+        <option value="Steam Engine">Steam Engine</option>
+        <option value="Moody">Moody</option>
+    </select>
+</div>
     <!--Collecting Individual Values 0-31 (IVs) and Effort Values 0-252 (EVs)-->
         <div class="IVs-wrapper">
             <label for="IVs" class="IVs-title">Enter IVs</label>
