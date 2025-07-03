@@ -1,155 +1,274 @@
-/* Chrome, Safari, Edge, Opera */
+
+/*Chrome, Safari, Edge, etc*/
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* Firefox */
+/*Firefox*/
 input[type=number] {
   -moz-appearance: textfield;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
-*{
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+
+* {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body{
-  font-family: Arial, Arial, Helvetica, sans-serif;
+/*base styling*/
+body {
   background-color: #f6f1f1;
-}
-
-
-#pokemon-content{
-  width: 50%;
-  border-style: solid;
-  border-color: #252A34;
-}
-
-#pokemon-one-wrap, #pokemon-two-wrap{
+  font-family: 'Roboto', sans-serif;
   display: flex;
-  width: 100%;
-  min-width: 50%;
-  justify-content: left;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-#pokemon-one-wrap{
-  background-color: #FF2E63;
-  border-right: solid;
-  
-}
-
-#pokemon-two-wrap{
-  background-color: #EAEAEA;
-}
-
-#pokemon-one-spec-wrap, #pokemon-two-spec-wrap{
-  margin-top: 10px;
-  margin-left: 2rem;
-}
-#pokemon-content{
-  margin: auto;
-  background-color: black;
-  display: flex;
-  overflow: hidden;
-  width: 75vw;  
-  height: 41vh;
-}
-
-.pokemon-input-container{
-  
-}
-
-.IVs-title{
-  padding-right: 6.5px;
-}
-
-
-input{
-  border: unset;
-  box-shadow: 1px 2px 3px 1px #3C3013,
-inset 1px 1px 1px 0.5px #4C4023,
-inset -1px -1px 1px 0.5px #8C8083;
+input {
+  border: none;
   background: rgb(245, 240, 240);
   padding: 0.5rem;
 }
 
-/*
-.btn-submit{
-  border: unset;
-  background: #268f26;
-  padding: 0.5rem;
-  color: #ffffff;
-  cursor: pointer;
-}*/
+/*main container that will resemble entire shape of pokeball*/
+#poke-ball-wrapper {
+  width: 90vmin;
+  height: 90vmin;
+  border: 4px solid #252A34;
+  border-radius: 5px;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
 
-.autocomplete-wrapper{
+/*top half for pokemon one*/
+#pokemon-one-wrap {
+  background-color: #FF2E63;
+  flex: 1;
+  padding: 1rem;
+  color: white;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+
+#pokemon-one-spec-wrap, #pokemon-two-spec-wrap{
+  padding: 2%;
+}
+
+#pokemon-one-input, #pokemon-two-input{
+  height: 3%;
+  width: 75%;
+  box-shadow: 1px 2px 3px 1px #3C3013,
+              inset 1px 1px 1px 0.5px #4C4023,
+              inset -1px -1px 1px 0.5px #8C8083;
+}
+
+/*bottom half for pokemon two*/
+#pokemon-two-wrap {
+  background-color: #EAEAEA;
+  flex: 1;
+  padding: 1rem;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/*shared options in middle band*/
+#shared-options-wrap {
+  background-color: #000;
+  color: white;
+  height: 12%;
+  position: relative;
+  display: inline-flex;
+  justify-content: left ;
+  align-items: center;
+  padding: 0 1.5rem;
+  z-index: 1;
+}
+
+#shared-options {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 2;
+}
+
+
+#shared-options label {
+  font-size: 0.75rem;
+}
+/*
+#shared-options select,
+#shared-options input[type="checkbox"] {
+  padding: 0.3rem 0.5rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 4px;
+  
+
+}
+  */
+  
+
+/*middle button base for entire pokeball*/
+#button-base {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 5.3rem;
+  height: 5.3rem;
+  background-color: black;
+  /*border: 3px solid #444;*/
+  z-index: 2;
+}
+
+/*circular button that will compute everything once selected*/
+#calculate-button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 3rem;
+  height: 3rem;
+  background-color: #ddd;
+  border: 4px solid #999;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: inset -2px -2px 4px #bbb, inset 2px 2px 4px #fff;
+  z-index: 3;
+  transition: all 0.2s ease;
+}
+
+#calculate-button:hover {
+  background-color: #f0f0f0;
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow: 0 0 10px #ffffffaa, inset 2px 2px 6px #fff;
+}
+
+
+
+/*input field wrappers*/
+.level-wrapper, .nature-wrapper, .ability-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.level-title, .nature-title, .ability-title {
+  margin-right: 0.5rem;
+}
+.IVs-wrapper, .EVs-wrapper {
+  margin-top: 10px;
+}
+.input-box {
+  height: 1.3rem;
+}
+.ability-select{
+  width: 7rem;
+}
+.ability-title, .nature-title, .level-title{
+  margin-right: 0.2rem;
+}
+#pokemon-one-IVs,#pokemon-one-EVs, #pokemon-two-IVs,#pokemon-two-EVs{
+  width:3.5rem;
+}
+
+/*autocomplete styling*/
+.autocomplete-wrapper {
   display: inline-block;
   margin-left: 10px;
   margin-top: 10px;
   position: relative;
 }
-
-.autocomplete-list{
+.autocomplete-list {
   list-style: none;
-  padding: unset;
-  margin: unset;
+  padding: 0;
+  margin: 0;
   position: absolute;
   width: 100%;
-  background-color:rgb(245, 240, 240);
+  background-color: rgb(245, 240, 240);
   border-right: solid 1.5px;
   border-left: solid 1.5px;
 }
-
-.autocomplete-list li{
+.autocomplete-list li {
   border: 1px solid #bcb9b9;
-  border-top: unset;
+  border-top: none;
 }
-
-.autocomplete-list li:hover{
+.autocomplete-list li:hover {
   background-color: rgb(219, 216, 213);
 }
-
-.autocomplete-list button{
-  border: unset;
-  background: unset;
+.autocomplete-list button {
+  border: none;
+  background: none;
   display: block;
   width: 100%;
   text-align: left;
   padding: 0.5rem;
 }
 
-.nature-wrapper{
+
+.pokemon-form-row {
   display: flex;
-  height: 1rem;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
 }
-.level-wrapper{
+
+/*ensure the search stays narrow and the stats expand */
+.autocomplete-wrapper {
+  flex: 0 0 250px;
+  position: relative; /*dropdown alignment*/
+}
+
+#pokemon-one-spec-wrap,
+#pokemon-two-spec-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+/*Shared options middle band
+#shared-options-wrap {
+  background-color: #000;
+  color: white;
+  height: 12%;
+  position: relative;
   display: flex;
-  height: 2rem;
-  border: unset;
-  padding: unset;
-  width: 100%;
+  justify-content: center;
   align-items: center;
-}
+  padding: 0 1.5rem;
+  z-index: 1;
+  overflow: visible;
+}*/
 
-.ability-wrapper{
+/*Make sure shared-options is on top
+#shared-options {
   display: flex;
-  height: 2rem;
   align-items: center;
+  gap: 1rem;
+  z-index: 2;
+  position: relative; 
+  padding: 1.5rem 0;
+}*/
+
+/*responsive going to add more later*/
+@media (max-width: 600px) {
+  #shared-options {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
 
-.level-title, .nature-title, .ability-title{
-  border: unset;
-  padding-right: 0.5rem;
-}
-
-.input-box{
-  height: 1.3rem;
-}
-
-.EVs-wrapper, .IVs-wrapper{
-  margin-top: 10px;
-}

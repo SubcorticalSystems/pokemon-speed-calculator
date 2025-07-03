@@ -1,0 +1,277 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pokemon Speed Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="poke-ball-wrapper">
+    <!--top of pokeball for pokemon one-->
+    <div id="pokemon-one-wrap">
+      <h2>Pokémon One</h2>
+      <form action="" autocomplete="off" class = "pokemon-form-row">
+        <div class="autocomplete-wrapper" id="pokemon-one-autocomplete-wrapper">
+          <input id="pokemon-one-input" type="text" placeholder="Enter First Pokemon" />
+        </div>
+
+        <fieldset id="pokemon-one-spec-wrap">
+          <legend>Pokémon One Stats</legend>
+
+          <!--pokemon one level-->
+          <div class="level-wrapper" id="pokemon-one-level-wrapper">
+            <label for="pokemon-one-level" class="level-title">Level</label>
+            <select name="level" class="level-select" id="pokemon-one-level" onchange="getLevel(this.id)">
+              <option value="five">5</option>
+              <option value="fifty" selected>50</option>
+              <option value="one hundred">100</option>
+            </select>
+          </div>
+
+          <!--pokemon one nature-->
+          <div class="nature-wrapper" id="pokemon-one-nature-wrapper">
+            <label for="pokemon-one-nature" class="nature-title">Nature</label>
+            <select name="natures" class="nature-select" id="pokemon-one-nature" onchange="getNature(this.id)">
+              <option value="none"></option>
+              <option value="Adament">Adament</option>
+              <option value="Bashful">Bashful</option>
+              <option value="Bold">Bold</option>
+              <option value="Brave">Brave</option>
+              <option value="Calm">Calm</option>
+              <option value="Careful">Careful</option>
+              <option value="Docile">Docile</option>
+              <option value="Gentle">Gentle</option>
+              <option value="Hardy">Hardy</option>
+              <option value="Hasty">Hasty</option>
+              <option value="Impish">Impish</option>
+              <option value="Jolly">Jolly</option>
+              <option value="Lax">Lax</option>
+              <option value="Lonely">Lonely</option>
+              <option value="Mild">Mild</option>
+              <option value="Modest">Modest</option>
+              <option value="Naive">Naive</option>
+              <option value="Naughty">Naughty</option>
+              <option value="Quiet">Quiet</option>
+              <option value="Quirky">Quirky</option>
+              <option value="Rash">Rash</option>
+              <option value="Relaxed">Relaxed</option>
+              <option value="Sassy">Sassy</option>
+              <option value="Serious">Serious</option>
+              <option value="Timid">Timid</option>
+            </select>
+          </div>
+
+          <!--pokemon one ability-->
+          <div class="ability-wrapper">
+            <label for="pokemon-one-ability" class="ability-title">Ability</label>
+            <select name="abilities" class="ability-select" id="pokemon-one-ability" onchange="getAbility(this.id)">
+              <option value="none"></option>
+              <option value="Unburden">Unburden</option>
+              <option value="Quick Feet">Quick Feet</option>
+              <option value="Speed Boost">Speed Boost</option>
+              <option value="Surge Surfer">Surge Surfer</option>
+              <option value="Weak Armor">Weak Armor</option>
+              <option value="Swift Swim">Swift Swim</option>
+              <option value="Chlorophyll">Chlorophyll</option>
+              <option value="Sand Rush">Sand Rush</option>
+              <option value="Slush Rush">Slush Rush</option>
+              <option value="Motor Drive">Motor Drive</option>
+              <option value="Steadfast">Steadfast</option>
+              <option value="Steam Engine">Steam Engine</option>
+              <option value="Moody">Moody</option>
+            </select>
+          </div>
+
+          <!--pokemon one IVs-->
+          <div class="IVs-wrapper">
+            <label for="pokemon-one-IVs" class="IVs-title">Enter IVs</label>
+            <input
+              type="number"
+              name="IVs"
+              class="input-box"
+              id="pokemon-one-IVs"
+              min="0"
+              max="31"
+              placeholder="0-31"
+              onkeyup="IvFetcher(this.id)"
+              onclick="IvFetcher(this.id)"
+            />
+          </div>
+
+          <!--pokemon one EVs-->
+          <div class="EVs-wrapper">
+            <label for="pokemon-one-EVs">Enter EVs</label>
+            <input
+              type="number"
+              name="EVs"
+              class="input-box"
+              id="pokemon-one-EVs"
+              min="0"
+              max="252"
+              placeholder="0-252"
+              onkeyup="EvFetcher(this.id)"
+              onclick="EvFetcher(this.id)"
+            />
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+    <!--Middle shared rectangle for board conditions-->
+    <div id="shared-options-wrap">
+      <div id="shared-options">
+        <div id="shared-options-trick-room">
+            <label for="trick-room">Trick Room:</label>
+            <input type="checkbox" id="trick-room" />
+        </div>
+
+        <div id="shared-options-tailwind">
+            <label for="tailwind">Tailwind:</label>
+            <input type="checkbox" id="tailwind" />
+            <!--make it so if toggled it will ask if pokemon one or two has tailwind active-->
+        </div>
+
+
+        <div id="shared-options-terrain">
+<label for="terrain">Terrain:</label>
+        <select id="terrain">
+          <option value="">None</option>
+          <option value="electric">Electric</option>
+          <option value="grassy">Grassy</option>
+          <option value="psychic">Psychic</option>
+          <option value="misty">Misty</option>
+        </select>
+        </div>
+        <div id="shared-options-weather">
+            <label for="weather">Weather:</label>
+        <select id="weather">
+          <option value="">None</option>
+          <option value="rain">Rain</option>
+          <option value="sun">Sun</option>
+          <option value="sand">Sand</option>
+          <option value="snow">Snow</option>
+        </select>
+        </div>
+        <div id="button-base"></div>
+      <button id="calculate-button" title="Calculate Speed"></button>
+      </div>
+    <!--
+      <div id="button-base"></div>
+      <button id="calculate-button" title="Calculate Speed"></button>-->
+    </div>
+
+    <!--bottom of pokeball for pokemon two-->
+    <div id="pokemon-two-wrap">
+      <h2>Pokémon Two</h2>
+      <form action="" autocomplete="off" class="pokemon-form-row">
+        <div class="autocomplete-wrapper" id="pokemon-two-autocomplete-wrapper">
+          <input id="pokemon-two-input" type="text" placeholder="Enter Second Pokemon" />
+        </div>
+
+        <fieldset id="pokemon-two-spec-wrap">
+          <legend>Pokémon Two Stats</legend>
+
+          <!--pokemon two level-->
+          <div class="level-wrapper">
+            <label for="pokemon-two-level" class="level-title">Level</label>
+            <select name="level" class="level-select" id="pokemon-two-level" onchange="getLevel(this.id)">
+              <option value="five">5</option>
+              <option value="fifty" selected>50</option>
+              <option value="one hundred">100</option>
+            </select>
+          </div>
+
+          <!--pokemon two nature-->
+          <div class="nature-wrapper">
+            <label for="pokemon-two-nature" class="nature-title">Nature</label>
+            <select name="natures" class="nature-select" id="pokemon-two-nature" onchange="getNature(this.id)">
+              <option value="none"></option>
+              <option value="Adament">Adament</option>
+              <option value="Bashful">Bashful</option>
+              <option value="Bold">Bold</option>
+              <option value="Brave">Brave</option>
+              <option value="Calm">Calm</option>
+              <option value="Careful">Careful</option>
+              <option value="Docile">Docile</option>
+              <option value="Gentle">Gentle</option>
+              <option value="Hardy">Hardy</option>
+              <option value="Hasty">Hasty</option>
+              <option value="Impish">Impish</option>
+              <option value="Jolly">Jolly</option>
+              <option value="Lax">Lax</option>
+              <option value="Lonely">Lonely</option>
+              <option value="Mild">Mild</option>
+              <option value="Modest">Modest</option>
+              <option value="Naive">Naive</option>
+              <option value="Naughty">Naughty</option>
+              <option value="Quiet">Quiet</option>
+              <option value="Quirky">Quirky</option>
+              <option value="Rash">Rash</option>
+              <option value="Relaxed">Relaxed</option>
+              <option value="Sassy">Sassy</option>
+              <option value="Serious">Serious</option>
+              <option value="Timid">Timid</option>
+            </select>
+          </div>
+
+          <!--pokemon two ability-->
+          <div class="ability-wrapper">
+            <label for="pokemon-two-ability" class="ability-title">Ability</label>
+            <select name="abilities" class="ability-select" id="pokemon-two-ability" onchange="getAbility(this.id)">
+              <option value="not-applicable"></option>
+              <option value="Unburden">Unburden</option>
+              <option value="Quick Feet">Quick Feet</option>
+              <option value="Speed Boost">Speed Boost</option>
+              <option value="Surge Surfer">Surge Surfer</option>
+              <option value="Weak Armor">Weak Armor</option>
+              <option value="Swift Swim">Swift Swim</option>
+              <option value="Chlorophyll">Chlorophyll</option>
+              <option value="Sand Rush">Sand Rush</option>
+              <option value="Slush Rush">Slush Rush</option>
+              <option value="Motor Drive">Motor Drive</option>
+              <option value="Steadfast">Steadfast</option>
+              <option value="Steam Engine">Steam Engine</option>
+              <option value="Moody">Moody</option>
+            </select>
+          </div>
+
+          <!--pokemon two IVs-->
+          <div class="IVs-wrapper">
+            <label for="pokemon-two-IVs" class="IVs-title">Enter IVs</label>
+            <input
+              type="number"
+              name="IVs"
+              class="input-box"
+              id="pokemon-two-IVs"
+              min="0"
+              max="31"
+              placeholder="0-31"
+              onkeyup="IvFetcher(this.id)"
+              onclick="IvFetcher(this.id)"
+            />
+          </div>
+
+          <!--pokemon two EVs-->
+          <div class="EVs-wrapper">
+            <label for="pokemon-two-EVs">Enter EVs</label>
+            <input
+              type="number"
+              name="EVs"
+              class="input-box"
+              id="pokemon-two-EVs"
+              min="0"
+              max="252"
+              placeholder="0-252"
+              onkeyup="EvFetcher(this.id)"
+              onclick="EvFetcher(this.id)"
+            />
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+<!--space for javascript-->
+  <script src="speedCalc.js"></script>
+</body>
+</html>
